@@ -64,7 +64,11 @@
   "org": "khanh71/All-In-One-IPTV"
  },
  "vtv6": {
-  "url": "https://vtvgolive-sctvdrm.vtvdigital.vn/manifest/vtv6/master.m3u8",
-  "org": "VTV official CDN"
+  "url": "https://vtvgolivepre-vtv02.vtvdigital.vn/hls/vtv/live/vtv6__vtv720p-h264/index.m3u8",
+  "org": "VTV official (vtvgolivepre)"
+ },
+ "vtv10": {
+  "url": "https://vtvgolivepre-vtv02.vtvdigital.vn/hls/vtv/live/vtv10__vtv720p-h264/index.m3u8",
+  "org": "VTV official (vtvgolivepre)"
  }
 }
