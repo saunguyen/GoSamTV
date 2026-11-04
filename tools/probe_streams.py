@@ -58,6 +58,19 @@ def fetch(url: str, limit: int = 4096):
         return response.status, body, time.time() - started
 
 
+def is_placeholder(text: str) -> bool:
+    """Some providers answer with a valid playlist that only shows a still
+    'signal low' card — that is a dead channel, not a working stream."""
+    if "signal_low" in text or "signal-low" in text:
+        return True
+    segments = [l.strip() for l in text.splitlines()
+                if l.strip() and not l.strip().startswith("#")]
+    if segments and "#EXT-X-ENDLIST" in text:
+        if all(seg.lower().endswith((".png", ".jpg", ".jpeg", ".gif")) for seg in segments):
+            return True
+    return False
+
+
 def probe(entry):
     result = dict(entry)
     result.update({"ok": False, "why": "", "ms": 0, "kind": ""})
@@ -91,11 +104,17 @@ def probe(entry):
             if "#EXTINF" not in text2 and "#EXT-X-TARGETDURATION" not in text2:
                 result["why"] = "variant without segments"
                 return result
+            if is_placeholder(text2):
+                result["why"] = "placeholder (signal low)"
+                return result
             result["kind"] = "master+segments"
         else:
             result["kind"] = "media"
             if "#EXTINF" not in text and "#EXT-X-TARGETDURATION" not in text:
                 result["why"] = "no segments"
+                return result
+            if is_placeholder(text):
+                result["why"] = "placeholder (signal low)"
                 return result
 
         result["ok"] = True
