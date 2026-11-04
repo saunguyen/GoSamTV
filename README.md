@@ -47,6 +47,10 @@ Dự án bắt đầu từ một APK Android TV (`launchpad2/tv`) không chạy 
   <img src="screenshots-tizen/19-net-sheet.png" width="49%" alt="Trạng thái kết nối">
 </p>
 
+<p align="center">
+  <img src="screenshots-tizen/05-guide.png" width="49%" alt="Lịch phát sóng theo kênh">
+  <img src="screenshots-tizen/08-epg-panel.png" width="49%" alt="Lịch phát sóng khi đang xem kênh">
+</p>
 ## Điều khiển bằng remote
 
 | Phím | Khi đang xem kênh | Khi ở trang chủ |
