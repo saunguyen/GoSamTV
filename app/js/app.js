@@ -1179,6 +1179,70 @@
     list: [],
     index: 0,
     osdTimer: null,
+    hls: null,
+    hlsLoading: null,
+
+    /* Tizen plays HLS natively; desktop Chrome/Firefox do not, so the web
+       build lazily loads hls.js the first time it is needed. */
+    nativeHls: function () {
+      var video = $('#video');
+      return !!(video.canPlayType('application/vnd.apple.mpegurl') ||
+        video.canPlayType('application/x-mpegURL'));
+    },
+
+    loadHlsJs: function () {
+      if (window.Hls) return Promise.resolve(true);
+      if (this.hlsLoading) return this.hlsLoading;
+      this.hlsLoading = new Promise(function (resolve) {
+        var script = document.createElement('script');
+        script.src = 'vendor/hls.min.js';
+        script.onload = function () { resolve(!!window.Hls); };
+        script.onerror = function () { resolve(false); };
+        document.head.appendChild(script);
+      });
+      return this.hlsLoading;
+    },
+
+    attach: function (video, url) {
+      var self = this;
+      this.detach(video);
+
+      var isStream = /\.m3u8(\?|$)/i.test(url);
+      if (!isStream || this.nativeHls()) {
+        video.src = url;
+        return;
+      }
+
+      this.loadHlsJs().then(function (ok) {
+        if (!ok || !window.Hls || !window.Hls.isSupported()) {
+          video.src = url;   // last resort: let the browser try
+          return;
+        }
+        var hls = new window.Hls({ lowLatencyMode: true, enableWorker: false });
+        self.hls = hls;
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        hls.on(window.Hls.Events.ERROR, function (event, data) {
+          if (!data || !data.fatal) return;
+          if (data.type === window.Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
+          else if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
+          else {
+            $('#osd-status').textContent = 'Kênh đang lỗi — thử kênh khác';
+            try { hls.destroy(); } catch (e) { /* ignore */ }
+          }
+        });
+        $('#osd-status').textContent = 'Đang phát (web)';
+      });
+    },
+
+    detach: function (video) {
+      if (this.hls) {
+        try { this.hls.destroy(); } catch (e) { /* ignore */ }
+        this.hls = null;
+      }
+      video.removeAttribute('src');
+      video.load();
+    },
 
     play: function (list, index) {
       this.list = list;
@@ -1198,7 +1262,7 @@
         fillLogo(art, channel);
         $('#radio-title').textContent = channel.name;
       }
-      video.src = channel.url;
+      this.attach(video, channel.url);
       video.play().catch(function () { /* autoplay may need a gesture; TV allows */ });
       $('#osd-title').textContent = channel.name;
       $('#osd-sub').textContent = isRadio ? 'Radio' : (channel.category || '');
@@ -1262,8 +1326,7 @@
       closeEpgPanel();
       var video = $('#video');
       video.pause();
-      video.removeAttribute('src');
-      video.load();
+      this.detach(video);
       video.classList.remove('audio-only');
       $('#radio-stage').hidden = true;
       $('#player').hidden = true;

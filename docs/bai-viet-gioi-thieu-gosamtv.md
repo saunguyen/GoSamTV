@@ -138,7 +138,7 @@ khi gán.
 
 ## Dùng thử
 
-Mã nguồn, bộ script dò luồng và gói cài đặt nằm trong repo này. Gói `dist/GoSamTV-1.6.4.wgt` đã ký sẵn,
+Mã nguồn, bộ script dò luồng và gói cài đặt nằm trong repo này. Bản web chạy thử: **https://saunguyen.github.io/GoSamTV/** (trình duyệt thiếu HLS sẽ tự nạp `hls.js`). Gói `dist/GoSamTV-1.6.4.wgt` đã ký sẵn,
 cài bằng Apps2Samsung hoặc Tizen Studio — hướng dẫn chi tiết trong [TIZEN.vi.md](../TIZEN.vi.md).
 
 Nếu bạn cũng có một chiếc TV Samsung và một danh sách kênh yêu thích, cứ fork rồi thay

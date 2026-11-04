@@ -9,7 +9,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Tizen-5.5%2B-1428A0?style=flat-square&logo=samsung&logoColor=white" alt="Tizen 5.5+">
   <img src="https://img.shields.io/badge/K%C3%AAnh-116_VN_%2B_509_qu%E1%BB%91c_t%E1%BA%BF-6c63ff?style=flat-square" alt="Channels">
-  <a href="https://github.com/saunguyen/GoSamTV/releases/latest"><img src="https://img.shields.io/badge/Version-1.6.4-2EA043?style=flat-square" alt="Version"></a>
+  <a href="https://github.com/saunguyen/GoSamTV/releases/latest"><img src="https://img.shields.io/badge/Version-1.7.0-2EA043?style=flat-square" alt="Version"></a>
   <img src="https://img.shields.io/badge/Price-Free-brightgreen?style=flat-square" alt="Free">
 </p>
 
@@ -61,18 +61,26 @@ Dự án bắt đầu từ một APK Android TV (`launchpad2/tv`) không chạy 
 
 Trong danh sách kênh: **giữ OK** để thêm/bỏ yêu thích.
 
+## Xem bản web (không cần TV)
+
+**https://saunguyen.github.io/GoSamTV/** — toàn bộ giao diện chạy trong trình duyệt: duyệt kênh, tìm kiếm,
+lịch phát sóng, radio, tin tức, thời tiết.
+
+- Trình duyệt không hỗ trợ HLS sẵn (Chrome/Firefox trên PC) sẽ tự nạp `hls.js` để phát kênh.
+- Một số kênh chặn CORS khi phát từ web; trên TV thì không bị.
+- Trạng thái Wi-Fi/Bluetooth và mở ứng dụng chỉ có trên TV.
 ## Cài lên TV Samsung
 
 **Cách 1 — Apps2Samsung (dễ nhất)**
 
 1. Bật *Developer mode* trên TV (Apps → nhập `12345` → bật).
 2. Cài [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung) trên điện thoại.
-3. Tải [GoSamTV-1.6.4.wgt](https://github.com/saunguyen/GoSamTV/releases/latest) (hoặc dùng file trong `dist/`) và cài qua Wi-Fi.
+3. Tải [GoSamTV-1.7.0.wgt](https://github.com/saunguyen/GoSamTV/releases/latest) (hoặc dùng file trong `dist/`) và cài qua Wi-Fi.
 
 **Cách 2 — Tizen Studio**
 
 ```bash
-tizen install -n GoSamTV-1.6.4.wgt -t <tên-TV>
+tizen install -n GoSamTV-1.7.0.wgt -t <tên-TV>
 ```
 
 Gói trong `dist/` đã được ký sẵn bằng chứng chỉ mức **Public** nên cài được trực tiếp, không cần
@@ -80,7 +88,7 @@ chứng chỉ Partner. Xem hướng dẫn chi tiết (tiếng Việt) ở [TIZEN
 
 ## Tải về
 
-[![Download](https://img.shields.io/badge/Tải_GoSamTV--1.6.4.wgt-2EA043?style=for-the-badge&logo=github)](https://github.com/saunguyen/GoSamTV/releases/latest)
+[![Download](https://img.shields.io/badge/Tải_GoSamTV--1.7.0.wgt-2EA043?style=for-the-badge&logo=github)](https://github.com/saunguyen/GoSamTV/releases/latest)
 
 Bản mới nhất nằm ở trang **Releases**; gói đã ký sẵn, chỉ việc cài.
 
