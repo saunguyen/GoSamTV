@@ -68,23 +68,23 @@ còn phát**:
 
 | Nguồn | Trước | Sau khi lọc | Ghi chú |
 |---|---|---|---|
-| Việt Nam (truyền hình) | 122 | **106** | tất cả đều dò được luồng; 16 kênh được thay link mới |
+| Việt Nam (truyền hình) | 122 | **107** | tất cả đều dò được luồng; 17 kênh được thay link mới |
 | Việt Nam (radio) | 11 | **10** | VOV1–VOV5, VOV Giao Thông HN/TP.HCM, Hà Nội FM 90, Hải Phòng FM, XONE Radio, RFI Tiếng Việt |
 | Quốc tế (`us.m3u`) | 1.127 | **509** | Phần lớn link cũ đã chết hoặc chặn IP |
 
 Radio nằm trong nhóm **RADIO** của mục Truyền hình. Khi phát, app hiện màn hình riêng (logo đài,
 tên đài, hiệu ứng sóng) thay vì khung hình đen, vì các đài này chỉ có tiếng.
 
-**16 kênh Việt Nam đã thay link mới** (`tools\vn-overrides.json`):
+**17 kênh Việt Nam đã thay link mới** (`tools\vn-overrides.json`):
 
 - **Nhóm HTV/HTVC (10 kênh)** lấy từ [khanh71/All-In-One-IPTV](https://raw.githubusercontent.com/khanh71/All-In-One-IPTV/main/http-iptv.m3u)
   (CDN `vnns.net`): HTV1, HTV2, HTV3, HTV7, HTV9, HTV Thể Thao, HTVC Gia Đình, HTVC Phim,
   HTVC Phụ Nữ, HTVC Plus.
 - Hà Nội 1, Tây Ninh, An Ninh TV, An Giang 2, Quảng Ninh 3, VTVcab 2 Phim Việt (luồng ON Phim Việt).
 
-**16 kênh còn lại chưa có luồng** — chủ yếu là đài tỉnh đã sáp nhập (Hà Nội 2, Hà Tĩnh, Đồng Nai 2,
+**15 kênh còn lại chưa có luồng** — chủ yếu là đài tỉnh đã sáp nhập (Hà Nội 2, Hà Tĩnh, Đồng Nai 2,
 Thừa Thiên Huế, Đắk Lắk, Khánh Hòa, Thanh Hóa, Bình Phước, Hậu Giang, Bình Định, Bà Rịa – Vũng Tàu,
-Yên Bái, Nhân Dân, VNews), thêm VTV6 và HTV4.
+Yên Bái, Nhân Dân, VNews), thêm HTV4.
 
 Muốn bổ sung: dán link `.m3u8` mới vào `tools\vn-overrides.json` theo mẫu
 `{"<id kênh>": {"url": "https://...", "org": "nguồn"}}` rồi chạy lại `prepare_assets.py` + build.
