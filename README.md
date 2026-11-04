@@ -9,7 +9,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Tizen-5.5%2B-1428A0?style=flat-square&logo=samsung&logoColor=white" alt="Tizen 5.5+">
   <img src="https://img.shields.io/badge/K%C3%AAnh-116_VN_%2B_509_qu%E1%BB%91c_t%E1%BA%BF-6c63ff?style=flat-square" alt="Channels">
-  <img src="https://img.shields.io/badge/Version-1.6.4-2EA043?style=flat-square" alt="Version">
+  <a href="https://github.com/saunguyen/GoSamTV/releases/latest"><img src="https://img.shields.io/badge/Version-1.6.4-2EA043?style=flat-square" alt="Version"></a>
   <img src="https://img.shields.io/badge/Price-Free-brightgreen?style=flat-square" alt="Free">
 </p>
 
@@ -63,7 +63,7 @@ Trong danh sách kênh: **giữ OK** để thêm/bỏ yêu thích.
 
 1. Bật *Developer mode* trên TV (Apps → nhập `12345` → bật).
 2. Cài [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung) trên điện thoại.
-3. Chọn file `dist/GoSamTV-1.6.4.wgt` trong repo này và cài qua Wi-Fi.
+3. Tải [GoSamTV-1.6.4.wgt](https://github.com/saunguyen/GoSamTV/releases/latest) (hoặc dùng file trong `dist/`) và cài qua Wi-Fi.
 
 **Cách 2 — Tizen Studio**
 
@@ -73,6 +73,12 @@ tizen install -n GoSamTV-1.6.4.wgt -t <tên-TV>
 
 Gói trong `dist/` đã được ký sẵn bằng chứng chỉ mức **Public** nên cài được trực tiếp, không cần
 chứng chỉ Partner. Xem hướng dẫn chi tiết (tiếng Việt) ở [TIZEN.vi.md](TIZEN.vi.md).
+
+## Tải về
+
+[![Download](https://img.shields.io/badge/Tải_GoSamTV--1.6.4.wgt-2EA043?style=for-the-badge&logo=github)](https://github.com/saunguyen/GoSamTV/releases/latest)
+
+Bản mới nhất nằm ở trang **Releases**; gói đã ký sẵn, chỉ việc cài.
 
 ## Tự build
 
