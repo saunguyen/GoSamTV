@@ -23,7 +23,7 @@ PROFILES = {
     "partner": ("Jelly2Sams - Partner", "-partner"),
 }
 
-VERSION = "1.7.3"
+VERSION = "1.7.4"
 
 # Variant A: element set copied from a TizenTube package that installs on the
 # CU8000 this project targets (Samsung TV profile, allow-navigation href form).
@@ -151,6 +151,16 @@ def main():
                        check=True, cwd=str(ROOT))
     except Exception as exc:  # noqa: BLE001
         print("news snapshot skipped:", exc)
+
+    # signed stream links expire; drop the ones that no longer answer before
+    # the channel list is rebuilt
+    try:
+        import subprocess
+
+        subprocess.run([sys.executable, str(ROOT / "tools" / "check_overrides.py")],
+                       check=False, cwd=str(ROOT))
+    except Exception as exc:  # noqa: BLE001
+        print("override check skipped:", exc)
 
     wanted = sys.argv[1:] or ["main", "compat", "hello"]
     results = [build(v) for v in wanted]

@@ -68,7 +68,7 @@ còn phát**:
 
 | Nguồn | Trước | Sau khi lọc | Ghi chú |
 |---|---|---|---|
-| Việt Nam (truyền hình) | 122 | **90** | tất cả đều dò được luồng thật; 17 kênh được thay link mới |
+| Việt Nam (truyền hình) | 122 | **91** | tất cả đều dò được luồng thật; 18 kênh được thay link mới |
 | Việt Nam (radio) | 11 | **10** | VOV1–VOV5, VOV Giao Thông HN/TP.HCM, Hà Nội FM 90, Hải Phòng FM, XONE Radio, RFI Tiếng Việt |
 | Quốc tế (`us.m3u`) | 1.127 | **509** | Phần lớn link cũ đã chết hoặc chặn IP |
 
@@ -82,9 +82,9 @@ tên đài, hiệu ứng sóng) thay vì khung hình đen, vì các đài này c
   HTVC Phụ Nữ, HTVC Plus.
 - Hà Nội 1, Tây Ninh, An Ninh TV, An Giang 2, Quảng Ninh 3, VTVcab 2 Phim Việt (luồng ON Phim Việt).
 
-**32 kênh còn lại chưa có luồng** — chủ yếu là đài tỉnh đã sáp nhập (Hà Nội 2, Hà Tĩnh, Đồng Nai 2,
+**31 kênh còn lại chưa có luồng** — chủ yếu là đài tỉnh đã sáp nhập (Hà Nội 2, Hà Tĩnh, Đồng Nai 2,
 Thừa Thiên Huế, Đắk Lắk, Khánh Hòa, Thanh Hóa, Bình Phước, Hậu Giang, Bình Định, Bà Rịa – Vũng Tàu,
-Yên Bái, Nhân Dân, VNews), thêm HTV4 và SCTV1.
+Yên Bái, Nhân Dân, VNews), thêm SCTV1.
 
 Muốn bổ sung: dán link `.m3u8` mới vào `tools\vn-overrides.json` theo mẫu
 `{"<id kênh>": {"url": "https://...", "org": "nguồn"}}` rồi chạy lại `prepare_assets.py` + build.

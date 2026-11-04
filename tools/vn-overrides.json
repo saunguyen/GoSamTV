@@ -66,5 +66,9 @@
  "vtv10": {
   "url": "https://vtvgolivepre-vtv02.vtvdigital.vn/hls/vtv/live/vtv10__vtv720p-h264/index.m3u8",
   "org": "VTV official (vtvgolivepre)"
+ },
+ "htv4": {
+  "url": "https://pop12-ec1-ateme.tv360.vn/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzkzODAwMzQ0Iiwic2lwIjoiIiwicGF0aCI6Ii9saXZlL2Vkcy80NDM0NDMvSExTX0NsZWFuX01ITF80cy8iLCJzZXNzaW9uX2Nkbl9pZCI6IjIwZWNiM2FlZjlkMDk2NzUiLCJzZXNzaW9uX2lkIjoiIiwiY2xpZW50X2lkIjoiIiwiZGV2aWNlX2lkIjoiIiwibWF4X3Nlc3Npb25zIjowLCJzZXNzaW9uX2R1cmF0aW9uIjowLCJ1cmwiOiJodHRwczovLzE3Mi4yNC4xNjguMTY0Iiwic2Vzc2lvbl90aW1lb3V0IjowLCJhdWQiOiIzNCIsInNvdXJjZXMiOlsyMDcsNDYzLDQ2Niw0NjgsNDY5XX0=.QpQE5HTKYhMUlolGOaKspdJEiQ1eNeTjVSAzmt1FkD5ny1QMoAVSBBTgHuSDepdXbcwdEIwewGgQ8izvjByvvw==/live/eds/443443/HLS_Clean_MHL_4s/index.m3u8?screen=MHL&uid=64230292",
+  "org": "TV360 signed link (expires ~2026-11-04 21:32)"
  }
 }

@@ -14,7 +14,7 @@ Thế là GoSamTV ra đời: cùng tinh thần "bật TV lên là mọi thứ đ
 
 ## Kết quả
 
-- **100 kênh Việt Nam** (90 truyền hình + 10 radio) và **509 kênh quốc tế** — tất cả đều đã dò luồng thật,
+- **101 kênh Việt Nam** (91 truyền hình + 10 radio) và **509 kênh quốc tế** — tất cả đều đã dò luồng thật,
   không có kênh chết trong danh sách.
 - **Lịch phát sóng** theo kênh và theo ngày.
 - **Tìm kiếm** bằng bàn phím ảo của TV, gõ không cần dấu.
@@ -50,7 +50,7 @@ Với 32 kênh Việt Nam đã chết, mình đi tìm link thay thế từ các 
 - **Nhóm HTV/HTVC**: tìm được một CDN công khai còn phát — lấy lại được 10 kênh (HTV1, HTV2, HTV3,
   HTV7, HTV9, HTV Thể Thao, HTVC Gia Đình, HTVC Phim, HTVC Phụ Nữ, HTVC Plus).
 - **6 kênh khác** thay được link (Hà Nội 1, Tây Ninh, An Ninh TV, An Giang 2, Quảng Ninh 3, VTVcab 2).
-- **32 kênh còn lại** không có luồng công khai: HTV4, SCTV1 (chặn vùng/DRM) và phần lớn là đài tỉnh đã sáp nhập
+- **31 kênh còn lại** không có luồng công khai: SCTV1 (chặn vùng/DRM) và phần lớn là đài tỉnh đã sáp nhập
   nên giờ chỉ tiếp sóng đài tỉnh mới.
 
 Tất cả những thay thế này nằm trong một file `vn-overrides.json` nhỏ, để lần sau chỉ cần thêm một dòng
@@ -138,7 +138,7 @@ khi gán.
 
 ## Dùng thử
 
-Mã nguồn, bộ script dò luồng và gói cài đặt nằm trong repo này. Bản web chạy thử: **https://saunguyen.github.io/GoSamTV/** (trình duyệt thiếu HLS sẽ tự nạp `hls.js`). Gói `dist/GoSamTV-1.7.3.wgt` đã ký sẵn,
+Mã nguồn, bộ script dò luồng và gói cài đặt nằm trong repo này. Bản web chạy thử: **https://saunguyen.github.io/GoSamTV/** (trình duyệt thiếu HLS sẽ tự nạp `hls.js`). Gói `dist/GoSamTV-1.7.4.wgt` đã ký sẵn,
 cài bằng Apps2Samsung hoặc Tizen Studio — hướng dẫn chi tiết trong [TIZEN.vi.md](../TIZEN.vi.md).
 
 Nếu bạn cũng có một chiếc TV Samsung và một danh sách kênh yêu thích, cứ fork rồi thay
