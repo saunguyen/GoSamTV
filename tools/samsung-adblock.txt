@@ -1,0 +1,19 @@
+# Domain quảng cáo / gợi ý của TV Samsung — dùng cho Pi-hole, AdGuard Home, NextDNS
+# Đã kiểm tra phân giải ngày 2026-11-04. Thêm vào blocklist dạng "hosts" hoặc "domain list".
+# KHÔNG chặn cdn.samsungcloudsolution.com (CDN của App Store/cập nhật).
+
+# --- quảng cáo trên Home / banner ---
+0.0.0.0 samsungads.com
+0.0.0.0 ads.samsungads.com
+0.0.0.0 samsungadhub.com
+
+# --- Samsung TV Plus (kênh + quảng cáo) ---
+0.0.0.0 samsungtvplus.com
+0.0.0.0 api.samsungtvplus.com
+0.0.0.0 tvplus.com
+
+# --- gợi ý app / nội dung trên Home ---
+0.0.0.0 osb-apps.samsungqbe.com
+
+# --- thông báo / khuyến mãi đẩy xuống TV ---
+0.0.0.0 notice.samsungcloudsolution.com
