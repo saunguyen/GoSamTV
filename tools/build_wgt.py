@@ -23,7 +23,7 @@ PROFILES = {
     "partner": ("Jelly2Sams - Partner", "-partner"),
 }
 
-VERSION = "1.7.4"
+VERSION = "1.7.9"
 
 # Variant A: element set copied from a TizenTube package that installs on the
 # CU8000 this project targets (Samsung TV profile, allow-navigation href form).

@@ -1065,3 +1065,125 @@ img { display: block; }
   z-index: 90;
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+
+/* ===== GoSamTV HOME 2.0 — light-weight Google TV-inspired presentation ===== */
+:root { --accent:#78aeff; --accent-2:#77e0db; --radius:22px; --line:rgba(255,255,255,.12); }
+body { background:#080c16; }
+.bg { background: radial-gradient(1000px 600px at 85% 0%,rgba(35,78,145,.28),transparent 72%),linear-gradient(140deg,#080d19 0%,#090e1b 52%,#080a12 100%); }
+.bg::after { background:linear-gradient(90deg,rgba(4,8,15,.14),transparent); }
+.topbar { height:90px; padding:0 64px; gap:24px; }
+.brand-mark { border-radius:12px; background:linear-gradient(145deg,#8bd5ff,#5483ff); box-shadow:none; }
+.brand-text { font-size:24px; letter-spacing:-.5px; }
+.brand-text b { color:#9cc7ff; }
+.tabs { border:0; background:rgba(255,255,255,.045); }
+.tab { font-size:17px; padding:10px 23px; }
+.tab.is-active { background:#e8f0ff; color:#121d35; }
+.now-time {font-size:26px}
+.round {background:rgba(255,255,255,.055)}
+.screen {height:calc(100vh - 90px); padding:6px 64px 100px; scroll-behavior:auto}
+.home2-spotlight {height:366px; position:relative; border-radius:28px; overflow:hidden; background:radial-gradient(470px 350px at 80% 36%,rgba(92,129,227,.36),transparent 73%),linear-gradient(109deg,#122241 0%,#12254b 48%,#13213c 100%); border:1px solid rgba(164,204,255,.13); isolation:isolate}
+.home2-spotlight:before {content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,16,31,.14),transparent 70%)}
+.home2-spotlight-content {position:relative; z-index:2; width:58%; height:100%; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; padding:28px 52px}
+.home2-eyebrow {display:flex; align-items:center; gap:10px; color:#b5dcff; letter-spacing:.16em; font-size:12px; font-weight:800}
+.home2-live-dot {width:8px;height:8px;border-radius:50%;background:#75e9d2;box-shadow:0 0 14px rgba(117,233,210,.65)}
+.home2-spotlight h1 {font-size:57px;letter-spacing:-2.2px;line-height:1.1;margin-top:20px;font-weight:800}
+.home2-spotlight h1 em {font-style:normal;color:#a4c8ff}
+.home2-spotlight p {max-width:680px;color:#b4c4df;font-size:17px;line-height:1.5;margin-top:15px}
+.home2-cta {display:flex;gap:12px;margin-top:24px}
+.home2-primary,.home2-secondary {height:51px;border-radius:11px;display:flex;align-items:center;gap:12px;padding:0 22px;font-weight:750;font-size:16px}
+.home2-primary {background:#eaf1ff;color:#0c1a35}
+.home2-primary .ic {width:21px;height:21px}
+.home2-secondary {background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.17);color:#fff}
+.home2-secondary span {font-size:26px;margin-left:10px;line-height:0}
+.home2-footnote {display:flex;align-items:center;gap:8px;margin-top:19px;color:#a0b4d1;font-size:13px}
+.home2-star {color:#77e0db;font-size:18px}
+.home2-art {position:absolute;inset:0 0 0 53%; overflow:hidden;background:radial-gradient(ellipse at 60% 50%,rgba(98,151,255,.16),transparent 60%)}
+.home2-art-disc {position:absolute; width:430px;height:430px;border-radius:50%;left:24%;top:-45px;background:linear-gradient(130deg,#3658aa 0%,#192f66 42%,#0b1733 100%);box-shadow:inset 15px 15px 55px rgba(174,210,255,.17),0 0 100px rgba(94,149,255,.20);border:1px solid rgba(176,209,255,.30)}
+.home2-art-disc:before {content:"";position:absolute;inset:50px;border-radius:50%;border:1px solid rgba(194,219,255,.14)}
+.home2-art-disc:after {content:"";position:absolute;width:270px;height:270px;left:78px;top:78px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(117,188,255,.18),rgba(5,11,25,.78) 70%)}
+.home2-orbit {position:absolute;border-radius:50%;border:1px solid rgba(174,213,255,.13)}
+.orbit-one {width:720px;height:720px;left:6%;top:-180px}
+.orbit-two {width:590px;height:590px;left:15%;top:-110px}
+.home2-art-word {position:absolute;top:43%;left:30%;font-size:53px;line-height:1;font-weight:900;letter-spacing:-3px;text-shadow:0 10px 28px rgba(0,0,0,.5)}
+.home2-art-word span {color:#85c5ff}
+.home2-art-caption {position:absolute;top:60%;left:32%;color:#a5bbdb;letter-spacing:.32em;font-size:11px;font-weight:700}
+.home2-launcher {margin-top:29px}
+.home2-row-head {display:flex;align-items:baseline;justify-content:space-between;margin:0 2px 16px}
+.home2-row-head h2 {font-size:24px;font-weight:750;letter-spacing:-.5px}
+.home2-row-head>span {font-size:14px;color:#8394af}
+.home2-shortcuts {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.home2-shortcut {min-width:0;min-height:108px;background:linear-gradient(137deg,rgba(32,44,67,.92),rgba(21,29,45,.96));border-radius:17px;border:1px solid rgba(255,255,255,.08);padding:17px;display:flex;align-items:center;gap:15px;transition:background .15s,border-color .15s}
+.home2-shortcut-icon {width:60px;height:60px;display:flex;align-items:center;justify-content:center;flex:none;font-size:36px;font-weight:550;border-radius:14px}
+.accent-blue .home2-shortcut-icon {background:#284b8c;color:#d8e8ff}
+.accent-purple .home2-shortcut-icon {background:#46397b;color:#e4d9ff}
+.accent-cyan .home2-shortcut-icon {background:#15505e;color:#a7f4f2}
+.accent-gold .home2-shortcut-icon {background:#635034;color:#ffdb9d}
+.home2-shortcut strong {font-size:18px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.home2-shortcut small {font-size:13px;color:#9dadc8;margin-top:6px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.home2-shortcut>b {margin-left:auto;color:#7791b9;font-size:22px;font-weight:400}
+.home2-widget-title {margin:29px 2px 13px}
+.hero {grid-template-columns:minmax(0,1.17fr) 265px minmax(0,1fr);grid-template-rows:132px 142px;gap:14px;margin:0}
+.card {box-shadow:none;backdrop-filter:none;background:linear-gradient(145deg,rgba(31,42,64,.92),rgba(17,24,40,.94));border-color:rgba(255,255,255,.085);border-radius:18px}
+.resume-name {font-size:25px}
+.weather-temp {font-size:36px}
+.date-day {font-size:75px}
+.featured-title {font-size:28px}
+.section {margin-top:29px}
+.section-title {font-size:24px}
+.section-title .ic {color:#93c0ff}
+.ticker {border-radius:16px}
+#section-tv {margin-top:30px}
+[data-focus].is-focused,.home2-shortcut:focus,.home2-primary:focus,.home2-secondary:focus {outline:3px solid #eaf5ff!important;outline-offset:2px;box-shadow:0 0 0 7px rgba(100,175,255,.16)!important}
+.home2-shortcut:hover {background:#293952;border-color:rgba(184,216,255,.37)}
+@media(max-width:1400px) {
+ .topbar {padding:0 40px}
+ .screen {padding-left:40px;padding-right:40px}
+ .home2-spotlight {height:330px}
+ .home2-spotlight-content {padding:26px 36px;width:64%}
+ .home2-spotlight h1 {font-size:44px}
+ .home2-art {left:50%}
+ .home2-shortcut {gap:9px;padding:12px}
+ .home2-shortcut-icon {width:45px;height:50px;font-size:27px}
+ .home2-shortcut strong {font-size:15px}
+ .home2-shortcut small {font-size:11px}
+ .hero {grid-template-columns:minmax(0,1.1fr) 230px minmax(0,1fr)}
+}
+@media(max-width:1000px) {
+ .home2-shortcuts {grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home2-spotlight-content {width:78%}
+ .home2-spotlight h1 {font-size:37px}
+ .home2-spotlight p {font-size:14px}
+ .home2-art {opacity:.35}
+ .hero {grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:160px 170px}
+ .hero>.resume {grid-area:1/1/2/2}
+ .hero>.weather {grid-area:2/1/3/2}
+ .hero>.datecard {grid-area:1/2/3/3}
+ .hero>.featured {display:none}
+}
+
+/* ===== Samsung AVPlay native video plane fix =====
+   AVPlay video is rendered below the Tizen WebView. Keep the page transparent
+   only while AVPlay is active so video is visible while OSD stays on top. */
+#avplay-object { display: none; }
+html.avplay-on,
+html.avplay-on body { background: transparent !important; }
+html.avplay-on .bg,
+html.avplay-on .topbar,
+html.avplay-on .screen { visibility: hidden !important; }
+html.avplay-on .player { background: transparent !important; }
+html.avplay-on #avplay-object {
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  z-index: 0;
+  pointer-events: none;
+}
+html.avplay-on .player video { display: none !important; }
+html.avplay-on .player-osd,
+html.avplay-on .player-hint,
+html.avplay-on .epg-panel,
+html.avplay-on .zap-panel { z-index: 5; }

@@ -1181,6 +1181,149 @@
     osdTimer: null,
     hls: null,
     hlsLoading: null,
+    streamToken: 0,
+    streamRetries: 0,
+    streamTimer: null,
+    avplayActive: false,
+    avplayPreparing: false,
+    avplayFailed: false,
+
+    useAvplay: function () {
+      return !!(window.webapis && window.webapis.avplay);
+    },
+
+    stopAvplay: function () {
+      if (this.useAvplay()) {
+        try { window.webapis.avplay.stop(); } catch (e) {}
+        try { window.webapis.avplay.close(); } catch (e) {}
+      }
+      this.avplayActive = false;
+      this.avplayPreparing = false;
+      // Restore the normal Home UI after the native video plane is closed.
+      document.documentElement.classList.remove('avplay-on');
+    },
+
+    startAvplay: function (url) {
+      if (!this.useAvplay()) return false;
+      var self = this;
+      var api = window.webapis.avplay;
+      var token = this.streamToken;
+      this.stopAvplay();
+      try {
+        // AVPlay renders on a native plane underneath the WebView. Make the
+        // WebView transparent first, otherwise its black page/player layer
+        // hides the picture while the audio remains audible.
+        document.documentElement.classList.add('avplay-on');
+        api.open(url);
+        this.avplayActive = true;
+        this.avplayPreparing = true;
+        // Samsung uses logical 1920x1080 coordinates even for 4K panels.
+        api.setDisplayRect(0, 0, 1920, 1080);
+        try { api.setDisplayMethod('PLAYER_DISPLAY_MODE_LETTER_BOX'); } catch (e) {}
+        try { api.setBufferingParam('PLAYER_BUFFER_FOR_PLAY', 'PLAYER_BUFFER_SIZE_IN_SECOND', 4); } catch (e) {}
+        api.setListener({
+          onbufferingstart: function () {
+            if (token !== self.streamToken) return;
+            $('#osd-status').textContent = 'Đang tải hình ảnh…';
+            self.armStreamTimer();
+          },
+          onbufferingcomplete: function () {
+            if (token !== self.streamToken) return;
+            self.clearStreamTimer();
+            var hasVideo = true;
+            try {
+              var streams = api.getCurrentStreamInfo() || [];
+              hasVideo = streams.some(function (item) { return item.type === 'VIDEO'; });
+              console.log('[GoSamTV AVPlay] streams=' + JSON.stringify(streams));
+            } catch (e) { console.log('[GoSamTV AVPlay] stream info: ' + e); }
+            $('#osd-status').textContent = hasVideo ? 'Đang phát (Samsung)' : 'Nguồn này không có luồng hình ảnh';
+          },
+          oncurrentplaytime: function () {
+            if (token !== self.streamToken) return;
+            self.clearStreamTimer();
+            self.streamRetries = 0;
+            $('#osd-status').textContent = 'Đang phát (Samsung)';
+          },
+          onerror: function (err) {
+            if (token !== self.streamToken) return;
+            $('#osd-status').textContent = 'Luồng lỗi: ' + String(err);
+            self.armStreamTimer();
+          },
+          onerrormsg: function (type, msg) {
+            if (token !== self.streamToken) return;
+            $('#osd-status').textContent = 'Không thể giải mã kênh';
+            self.armStreamTimer();
+          }
+        });
+        api.prepareAsync(function () {
+          if (token !== self.streamToken || !self.open) return;
+          self.avplayPreparing = false;
+          // Re-apply the full-screen native video rectangle once the stream
+          // is READY; this also handles TVs that reset it during prepareAsync.
+          try { api.setDisplayRect(0, 0, 1920, 1080); } catch (e) {}
+          try { api.setDisplayMethod('PLAYER_DISPLAY_MODE_LETTER_BOX'); } catch (e) {}
+          try { api.play(); } catch (e) { self.armStreamTimer(); }
+        }, function () {
+          if (token !== self.streamToken) return;
+          self.avplayPreparing = false;
+          $('#osd-status').textContent = 'Kênh không tương thích — đang thử lại';
+          self.armStreamTimer();
+        });
+        return true;
+      } catch (e) {
+        this.stopAvplay();
+        return false;
+      }
+    },
+
+    clearStreamTimer: function () {
+      clearTimeout(this.streamTimer);
+      this.streamTimer = null;
+    },
+
+    armStreamTimer: function () {
+      var self = this;
+      var token = this.streamToken;
+      this.clearStreamTimer();
+      this.streamTimer = setTimeout(function () {
+        if (!self.open || token !== self.streamToken) return;
+        var video = $('#video');
+        if (self.avplayActive) {
+          try {
+            if (window.webapis.avplay.getState() === 'PLAYING') return;
+          } catch (e) {}
+        } else if (video.readyState >= 3 && !video.paused) return;
+        if (self.streamRetries >= 2) {
+          $('#osd-status').textContent = 'Luồng không phản hồi — chọn kênh khác';
+          return;
+        }
+        self.streamRetries++;
+        $('#osd-status').textContent = 'Đang thử kết nối lại (' + self.streamRetries + '/2)…';
+        var channel = self.list[self.index];
+        if (!channel) return;
+        if (self.useAvplay() && self.startAvplay(channel.url)) {
+          self.armStreamTimer();
+        } else {
+          self.attach(video, channel.url);
+          self.safePlay(video);
+          self.armStreamTimer();
+        }
+      }, 14000);
+    },
+
+    safePlay: function (video) {
+      try {
+        var result = video.play();
+        // Older Samsung Tizen engines return undefined, not a Promise.
+        if (result && typeof result.catch === 'function') {
+          result.catch(function () {
+            $('#osd-status').textContent = 'Nhấn OK để phát kênh';
+          });
+        }
+      } catch (e) {
+        $('#osd-status').textContent = 'Không thể khởi động video';
+      }
+    },
 
     /* Tizen plays HLS natively; desktop Chrome/Firefox do not, so the web
        build lazily loads hls.js the first time it is needed. */
@@ -1193,12 +1336,16 @@
     loadHlsJs: function () {
       if (window.Hls) return Promise.resolve(true);
       if (this.hlsLoading) return this.hlsLoading;
+      var self = this;
       this.hlsLoading = new Promise(function (resolve) {
         var script = document.createElement('script');
         script.src = 'vendor/hls.min.js';
         script.onload = function () { resolve(!!window.Hls); };
         script.onerror = function () { resolve(false); };
         document.head.appendChild(script);
+      }).then(function (ok) {
+        if (!ok) self.hlsLoading = null;
+        return ok;
       });
       return this.hlsLoading;
     },
@@ -1213,12 +1360,16 @@
         return;
       }
 
+      var token = this.streamToken;
       this.loadHlsJs().then(function (ok) {
+        // Loading the player script may finish after channel switch or exit.
+        if (!self.open || token !== self.streamToken) return;
         if (!ok || !window.Hls || !window.Hls.isSupported()) {
           video.src = url;   // last resort: let the browser try
+          self.safePlay(video);
           return;
         }
-        var hls = new window.Hls({ lowLatencyMode: true, enableWorker: false });
+        var hls = new window.Hls({ lowLatencyMode: false, enableWorker: false });
         self.hls = hls;
         hls.loadSource(url);
         hls.attachMedia(video);
@@ -1231,7 +1382,8 @@
             try { hls.destroy(); } catch (e) { /* ignore */ }
           }
         });
-        $('#osd-status').textContent = 'Đang phát (web)';
+        $('#osd-status').textContent = 'Đang kết nối (web)…';
+        self.safePlay(video);
       });
     },
 
@@ -1247,6 +1399,10 @@
     play: function (list, index) {
       this.list = list;
       this.index = index;
+      this.streamToken++;
+      this.streamRetries = 0;
+      this.clearStreamTimer();
+      this.stopAvplay();
       var channel = list[index];
       if (!channel) return;
 
@@ -1262,8 +1418,14 @@
         fillLogo(art, channel);
         $('#radio-title').textContent = channel.name;
       }
-      this.attach(video, channel.url);
-      video.play().catch(function () { /* autoplay may need a gesture; TV allows */ });
+      if (this.useAvplay() && this.startAvplay(channel.url)) {
+        video.style.display = 'none';
+      } else {
+        video.style.display = '';
+        this.attach(video, channel.url);
+        this.safePlay(video);
+      }
+      this.armStreamTimer();
       $('#osd-title').textContent = channel.name;
       $('#osd-sub').textContent = isRadio ? 'Radio' : (channel.category || '');
       $('#osd-next').textContent = '';
@@ -1322,11 +1484,15 @@
 
     close: function () {
       this.open = false;
+      this.streamToken++;
+      this.clearStreamTimer();
+      this.stopAvplay();
       closeZap();
       closeEpgPanel();
       var video = $('#video');
-      video.pause();
+      try { video.pause(); } catch (e) {}
       this.detach(video);
+      video.style.display = '';
       video.classList.remove('audio-only');
       $('#radio-stage').hidden = true;
       $('#player').hidden = true;
@@ -1593,15 +1759,19 @@
   }
 
   $('#video').addEventListener('playing', function () {
+    Player.clearStreamTimer();
+    Player.streamRetries = 0;
     $('#osd-status').textContent = 'Đang phát';
   });
   $('#video').addEventListener('waiting', function () {
+    if (!Player.open) return;
     $('#osd-status').textContent = 'Đang tải…';
+    Player.armStreamTimer();
   });
   $('#video').addEventListener('error', function () {
     if (!Player.open) return;
-    $('#osd-status').textContent = 'Không phát được kênh này';
-    toast('Kênh này đang lỗi hoặc chặn truy cập');
+    $('#osd-status').textContent = 'Không phát được — đang thử lại';
+    Player.armStreamTimer();
   });
 
   function renderResume() {
@@ -1610,6 +1780,8 @@
     if (channel) {
       fillLogo(logo, channel);
       $('#resume-name').textContent = channel.name;
+      var lastLabel = $('#home2-last');
+      if (lastLabel) lastLabel.textContent = 'Đã xem gần đây: ' + channel.name;
       $('#resume-sub').textContent = channel.category || 'Truyền hình';
       EPG.get(channel).then(function (data) {
         if (!data || !channel) return;
@@ -2651,6 +2823,11 @@
     var name = action.dataset.action;
     if (name === 'settings') openSettings();
     else if (name === 'refresh') { refreshAll(); toast('Đang cập nhật…'); }
+    else if (name === 'resume') {
+      var last = state.lastChannel ? Channels.byId(state.lastChannel) : null;
+      if (last) { var playingList = Channels.filtered(); var playingIndex = playingList.indexOf(last); Player.play(playingIndex >= 0 ? playingList : [last], playingIndex >= 0 ? playingIndex : 0); }
+      else openChannelList();
+    }
     else if (name === 'apps') switchTab('apps');
     else if (name === 'channel-list') openChannelList();
     else if (name === 'guide') openGuide();

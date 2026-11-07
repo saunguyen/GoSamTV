@@ -78,6 +78,36 @@
 </header>
 
 <main class="screen" id="screen-home">
+  <!-- Home 2.0: built from local CSS and data, with no heavyweight artwork. -->
+  <section class="home2-spotlight" aria-label="GoSamTV Home">
+    <div class="home2-art" aria-hidden="true">
+      <div class="home2-orbit orbit-one"></div>
+      <div class="home2-orbit orbit-two"></div>
+      <div class="home2-art-disc"></div>
+      <div class="home2-art-word">GO<span>SAM</span></div>
+      <div class="home2-art-caption">LIVE TELEVISION · SMART HOME</div>
+    </div>
+    <div class="home2-spotlight-content">
+      <span class="home2-eyebrow"><span class="home2-live-dot"></span> TRẢI NGHIỆM TV CỦA BẠN</span>
+      <h1>Thế giới giải trí.<br><em>Một màn hình.</em></h1>
+      <p>Truyền hình trực tiếp, lịch phát sóng và những tiện ích bạn yêu thích. Gọn gàng, không quảng cáo trong giao diện GoSamTV.</p>
+      <div class="home2-cta">
+        <button class="home2-primary" data-action="resume" data-focus><svg class="ic"><use href="#i-play"></use></svg> Tiếp tục xem TV</button>
+        <button class="home2-secondary" data-action="channel-list" data-focus>Khám phá kênh <span>›</span></button>
+      </div>
+      <div class="home2-footnote"><span class="home2-star">✦</span><span id="home2-last">Sẵn sàng cho buổi xem hôm nay</span></div>
+    </div>
+  </section>
+  <section class="home2-launcher" aria-label="Lối tắt">
+    <div class="home2-row-head"><h2>Dành riêng cho bạn</h2><span>Điều khiển bằng các phím ◀ ▲ ▼ ▶ và OK</span></div>
+    <div class="home2-shortcuts">
+      <button class="home2-shortcut accent-blue" data-action="channel-list" data-focus><span class="home2-shortcut-icon">▣</span><span><strong>Truyền hình</strong><small>Kênh Việt Nam & quốc tế</small></span><b>›</b></button>
+      <button class="home2-shortcut accent-purple" data-action="guide" data-focus><span class="home2-shortcut-icon">◷</span><span><strong>Lịch phát sóng</strong><small>Hôm nay có gì?</small></span><b>›</b></button>
+      <button class="home2-shortcut accent-cyan" data-action="search" data-focus><span class="home2-shortcut-icon">⌕</span><span><strong>Tìm kênh</strong><small>Tìm theo tên</small></span><b>›</b></button>
+      <button class="home2-shortcut accent-gold" data-action="apps" data-focus><span class="home2-shortcut-icon">▦</span><span><strong>Ứng dụng TV</strong><small>Mở ứng dụng đã cài</small></span><b>›</b></button>
+    </div>
+  </section>
+  <div class="home2-row-head home2-widget-title"><h2>Thông tin hôm nay</h2><span>Thời tiết · Lịch · Tin nổi bật</span></div>
 
   <section class="hero">
     <button class="card resume" id="hero-resume" data-focus>
@@ -205,6 +235,8 @@
 
 <!-- Player -->
 <section class="player" id="player" hidden>
+  <!-- Samsung AVPlay native video plane (required by the TV playback API). -->
+  <object id="avplay-object" type="application/avplayer" aria-hidden="true"></object>
   <video id="video" playsinline></video>
   <div class="radio-stage" id="radio-stage" hidden>
     <div class="radio-art" id="radio-art"></div>
@@ -307,6 +339,7 @@
 
 <div class="toast" id="toast"></div>
 
+<script src="$WEBAPIS/webapis/webapis.js"></script>
 <script src="data/channels.js"></script>
 <script src="data/epg-map.js"></script>
 <script src="data/news.js"></script>
