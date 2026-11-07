@@ -1,4 +1,4 @@
-# GoSamTV 1.7.9: tự làm giao diện truyền hình cho Samsung Tizen
+# GoSamTV 1.8.0: tự làm giao diện truyền hình cho Samsung Tizen
 
 *Ghi chép thực tế từ Samsung CU8000 55 inch: từ một ý tưởng thay giao diện Home đến một ứng dụng phát truyền hình có hình, tiếng và điều khiển bằng remote.*
 
@@ -32,6 +32,10 @@ Cách sửa trong GoSamTV:
 
 **Bản 1.7.8 đã được xác nhận phát được hình và tiếng trên TV thử nghiệm. Bản 1.7.9 giữ cơ chế đó và cập nhật logo.** Đây là kết quả thử trên thiết bị thực tế, không phải lời hứa tương thích mọi dòng Samsung hay mọi luồng IPTV.
 
+## Cải tiến ở phiên bản 1.8.0
+
+GoSamTV luôn khởi động vào trang chủ thay vì tự bật kênh đã xem. Khi mở từ Smart Hub, ứng dụng bỏ qua phím OK còn sót của thao tác mở app; người dùng có thể chọn **Tiếp tục xem TV** khi thực sự muốn phát kênh cũ. Bản này giữ nguyên bộ phát hình/tiếng Samsung AVPlay đã được kiểm tra trên CU8000.
+
 ## Tính năng chính
 
 - **101 kênh Việt Nam** trong dữ liệu đóng gói (91 truyền hình, 10 radio) cùng danh sách quốc tế, có phân nhóm và tìm kiếm không dấu.
@@ -56,7 +60,7 @@ Cách sửa trong GoSamTV:
 ## Tải và trải nghiệm
 
 - **Mã nguồn:** [saunguyen/GoSamTV](https://github.com/saunguyen/GoSamTV)
-- **Gói cài cho Samsung:** [GoSamTV 1.7.9 (.wgt)](../dist/GoSamTV-1.7.9.wgt)
+- **Gói cài cho Samsung:** [GoSamTV 1.8.0 (.wgt)](../dist/GoSamTV-1.8.0.wgt)
 - **Xem thử trên web:** https://saunguyen.github.io/GoSamTV/
 - **Hướng dẫn Tizen:** [TIZEN.vi.md](../TIZEN.vi.md)
 

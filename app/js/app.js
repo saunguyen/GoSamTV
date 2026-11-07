@@ -64,6 +64,10 @@
   ];
 
   var STORE_KEY = 'lp.state.v2';
+  // Samsung may forward the launch OK button into the first focused control.
+  // Consume only that launch press; a newly pressed OK works normally.
+  var launchEnterReleased = false;
+  var launchEnterGuardUntil = Date.now() + 1300;
 
   var state = {
     tab: 'home',
@@ -2886,6 +2890,12 @@
 
   function handleKey(e) {
     var code = e.keyCode;
+    // Opening the app from Smart Hub uses OK. Discard any trailing/repeated
+    // keydown from the same press so it cannot play the resume channel.
+    if (code === 13 && Date.now() < launchEnterGuardUntil) {
+      e.preventDefault();
+      return;
+    }
 
     if (Player.open) {
       if (Player.zapOpen) {
@@ -2967,6 +2977,9 @@
   }
 
   document.addEventListener('keydown', handleKey);
+  document.addEventListener('keyup', function (e) {
+    if (e.keyCode === 13) launchEnterReleased = true;
+  });
 
   function registerTvKeys() {
     if (!T || !T.tvinputdevice) return;
@@ -2989,6 +3002,13 @@
 
   function boot() {
     loadState();
+    // Always start on Home. The previous channel is only a shortcut;
+    // it must never open automatically on startup.
+    state.tab = 'home';
+    document.documentElement.classList.remove('avplay-on');
+    $('#player').hidden = true;
+    Player.open = false;
+    Player.stopAvplay();
     // One-time recovery: the old "source" button toggled to the international
     // list by accident, so start those installs back on the Vietnamese list.
     if (!state.srcFix) {
@@ -3008,7 +3028,8 @@
         pill.classList.toggle('is-active', pill.dataset.filter === state.filter);
       });
     }
-    if (state.tab === 'apps') switchTab('apps');
+    // Saved tab choices must not override Home on the next launch.
+    switchTab('home');
 
     loadWeather();
     loadMarket();
@@ -3020,12 +3041,25 @@
     registerTvKeys();
 
     setTimeout(function () {
-      // Start at the top of the page so the hero is visible; the resume card
-      // is the natural first stop and already knows the last channel.
-      var start = visible($('#hero-resume')) ? $('#hero-resume') : $('.tab.is-active');
+      // Focus a non-playing navigation item, never the resume card.
+      // Press OK to open a channel only after the user chooses a shortcut.
+      var start = $('.tab.is-active') || $('.home2-secondary');
       if (start) Focus.set(start);
+      $('#screen-home').scrollTop = 0;
     }, 120);
   }
+
+  // Tizen may resume the existing app instead of starting a new process.
+  // Bring Home back when the app becomes visible after being backgrounded.
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) return;
+    launchEnterReleased = false;
+    launchEnterGuardUntil = Date.now() + 1000;
+    if (Player.open) Player.close();
+    switchTab('home');
+    var home = $('#screen-home');
+    if (home) home.scrollTop = 0;
+  });
 
   window.LP = {
     state: state,

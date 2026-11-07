@@ -9,13 +9,15 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Tizen-5.5%2B-1428A0?style=flat-square&logo=samsung&logoColor=white" alt="Tizen 5.5+">
   <img src="https://img.shields.io/badge/K%C3%AAnh-101_VN_%2B_509_qu%E1%BB%91c_t%E1%BA%BF-6c63ff?style=flat-square" alt="Channels">
-  <a href="dist/GoSamTV-1.7.9.wgt"><img src="https://img.shields.io/badge/Version-1.7.9-2EA043?style=flat-square" alt="Version"></a>
+  <a href="dist/GoSamTV-1.8.0.wgt"><img src="https://img.shields.io/badge/Version-1.8.0-2EA043?style=flat-square" alt="Version"></a>
   <img src="https://img.shields.io/badge/Price-Free-brightgreen?style=flat-square" alt="Free">
 </p>
 
 ![GoSamTV Home 2.0](screenshots-tizen/20-home2.png)
 
-> **Mới trong 1.7.9:** Giao diện Home 2.0 theo phong cách Google TV, logo cam–xanh lá, và bản sửa trình phát AVPlay giúp khắc phục tình trạng chỉ có tiếng mà không có hình trên Samsung CU8000. Đã cài và thử nghiệm thực tế trên UA55CU8000KXXV (Tizen 9.0).
+> **GoSamTV Home 2.0:** Giao diện Home 2.0 theo phong cách Google TV, logo cam–xanh lá, và bản sửa trình phát AVPlay giúp khắc phục tình trạng chỉ có tiếng mà không có hình trên Samsung CU8000. Đã cài và thử nghiệm thực tế trên UA55CU8000KXXV (Tizen 9.0).
+
+**Bản 1.8.0:** Ứng dụng luôn mở ở giao diện Home 2.0, không tự phát lại kênh đang xem. Kênh gần đây chỉ phát khi bạn chọn **Tiếp tục xem TV** hoặc chọn kênh bằng remote. Đã khắc phục tình huống phím OK từ Smart Hub còn được chuyển vào ứng dụng lúc khởi chạy. Giữ nguyên logo cam–xanh lá và sửa lỗi AVPlay đã hoạt động trên Samsung CU8000.
 
 ## GoSamTV là gì?
 
@@ -79,12 +81,12 @@ lịch phát sóng, radio, tin tức, thời tiết.
 
 1. Bật *Developer mode* trên TV (Apps → nhập `12345` → bật).
 2. Cài [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung) trên máy tính.
-3. Tải [GoSamTV-1.7.9.wgt](dist/GoSamTV-1.7.9.wgt) từ kho mã nguồn (hoặc [trang Releases](https://github.com/saunguyen/GoSamTV/releases), nếu bản phát hành đã được đăng) rồi chọn **Install a file…** trong Apps2Samsung. Bản này đã ký và cài thử trên Samsung CU8000.
+3. Tải [GoSamTV-1.8.0.wgt](dist/GoSamTV-1.8.0.wgt) từ kho mã nguồn (hoặc [trang Releases](https://github.com/saunguyen/GoSamTV/releases), nếu bản phát hành đã được đăng) rồi chọn **Install a file…** trong Apps2Samsung. Bản này đã ký và cài thử trên Samsung CU8000.
 
 **Cách 2 — Tizen Studio**
 
 ```bash
-tizen install -n GoSamTV-1.7.9.wgt -t <tên-TV>
+tizen install -n GoSamTV-1.8.0.wgt -t <tên-TV>
 ```
 
 Gói trong `dist/` đã được ký sẵn bằng chứng chỉ mức **Public** nên cài được trực tiếp, không cần
@@ -92,9 +94,9 @@ chứng chỉ Partner. Xem hướng dẫn chi tiết (tiếng Việt) ở [TIZEN
 
 ## Tải về
 
-[![Download](https://img.shields.io/badge/Tải_GoSamTV--1.7.9.wgt-2EA043?style=for-the-badge&logo=github)](dist/GoSamTV-1.7.9.wgt)
+[![Download](https://img.shields.io/badge/Tải_GoSamTV--1.8.0.wgt-2EA043?style=for-the-badge&logo=github)](dist/GoSamTV-1.8.0.wgt)
 
-Bản WGT 1.7.9 đã ký sẵn nằm trong `dist/`; có thể tải trực tiếp từ kho mã nguồn. Trang Releases có thể được cập nhật riêng.
+Bản WGT 1.8.0 đã ký sẵn nằm trong `dist/`; có thể tải trực tiếp từ kho mã nguồn. Trang Releases có thể được cập nhật riêng.
 
 ## Tự build
 
@@ -145,7 +147,7 @@ docs/                bài viết giới thiệu và tài liệu
 ## Lưu ý phát video trên Samsung Tizen
 
 - Trên TV, GoSamTV ưu tiên Samsung AVPlay. Vùng video native nằm dưới lớp WebView, vì vậy ứng dụng chuyển nền sang trong suốt khi phát; nếu không, có thể nghe tiếng mà chỉ thấy nền đen.
-- Đã kiểm tra thành công hình và tiếng trên Samsung CU8000 với bản 1.7.8; bản 1.7.9 thay biểu tượng, giữ nguyên bản sửa này.
+- Đã kiểm tra thành công hình và tiếng trên Samsung CU8000 với bản 1.7.8; bản 1.8.0 thay biểu tượng, giữ nguyên bản sửa này.
 - Một số luồng IPTV có thể ngừng hoạt động, giới hạn vùng hoặc không hỗ trợ codec; việc có trong danh sách không bảo đảm phát được ở mọi thời điểm.
 - Nếu logo cũ vẫn còn sau cập nhật, thử thoát ứng dụng và mở lại; Smart Hub có thể lưu bộ nhớ đệm biểu tượng.
 
