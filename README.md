@@ -18,7 +18,7 @@ Danh mục mặc định có **178 kênh (147 truyền hình, 31 radio)** đã t
 
 ## Hình ảnh giao diện
 
-Các ảnh dưới đây được chụp trực tiếp từ **GoSamTV Lite 1.8.3 trên Chrome** (bản xem trước để kiểm tra giao diện); hiển thị trên Samsung TV có thể hơi khác.
+Các ảnh giới thiệu được ghi lại từ **GoSamTV Lite 1.8.3**: ảnh giao diện kiểm thử trên Chrome và ảnh thực tế người dùng cung cấp (VTV6). Hiển thị trên Samsung TV có thể hơi khác.
 
 <div align="center">
 
@@ -37,6 +37,14 @@ Các ảnh dưới đây được chụp trực tiếp từ **GoSamTV Lite 1.8.3
 **Radio Việt Nam**
 
 <img src="screenshots-lite/04-radio.png" alt="Màn hình radio GoSamTV Lite" width="850">
+
+**Lịch phát sóng — ON Kids**
+
+<img src="screenshots-lite/05-lich-phat-song-on-kids.png" alt="Lịch phát sóng ON Kids hiển thị trên GoSamTV Lite" width="850">
+
+**Danh sách kênh — VTV6**
+
+<img src="screenshots-lite/06-danh-sach-kenh-vtv6.png" alt="Danh sách kênh GoSamTV Lite đang xem VTV6 — ảnh do người dùng cung cấp" width="850">
 
 </div>
 
