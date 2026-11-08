@@ -12,7 +12,7 @@ import shutil
 import sys
 from pathlib import Path
 
-ROOT = Path(r"S:\GoSamTV")
+ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "app"
 BUILD = ROOT / "build"
 DIST = ROOT / "dist"
@@ -23,7 +23,7 @@ PROFILES = {
     "partner": ("Jelly2Sams - Partner", "-partner"),
 }
 
-VERSION = "1.8.0"
+VERSION = "1.8.3"
 
 # Variant A: element set copied from a TizenTube package that installs on the
 # CU8000 this project targets (Samsung TV profile, allow-navigation href form).
@@ -33,12 +33,13 @@ CONFIG_MAIN = """<?xml version="1.0" encoding="UTF-8"?>
     <access origin="*" subdomains="true"></access>
     <tizen:allow-navigation href="*"/>
     <tizen:application id="LPadTV2026.Home" package="LPadTV2026" required_version="3.0"/>
-    <author href="https://launchpad.tv">LaunchPad TV</author>
+    <author href="https://github.com/saunguyen/GoSamTV">GoSamTV</author>
     <content src="index.html"></content>
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <feature name="http://tizen.org/feature/web.service"/>
     <icon src="icon.png" width="512" height="512"/>
-    <name>GoSamTV</name>
+    <name>GoSamTV Lite</name>
+    <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
     <tizen:privilege name="http://tizen.org/privilege/internet"/>
   <tizen:privilege name="http://tizen.org/privilege/network.get"/>
   <tizen:privilege name="http://tizen.org/privilege/bluetooth"/>
@@ -58,9 +59,10 @@ CONFIG_COMPAT = """<?xml version="1.0" encoding="UTF-8"?>
     <content src="index.html"/>
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <icon src="icon.png"/>
-    <name>GoSamTV</name>
+    <name>GoSamTV Lite</name>
     <tizen:profile name="tv-samsung"/>
     <access origin="*" subdomains="true"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
     <tizen:privilege name="http://tizen.org/privilege/internet"/>
   <tizen:privilege name="http://tizen.org/privilege/network.get"/>
   <tizen:privilege name="http://tizen.org/privilege/bluetooth"/>
@@ -106,6 +108,25 @@ def stage(variant: str):
         BUILD.mkdir(parents=True)
         (BUILD / "index.html").write_text(HELLO_HTML, encoding="utf-8")
         shutil.copy2(APP / "img" / "icon.png", BUILD / "icon.png")
+    elif variant in ("main", "compat"):
+        # Official GoSamTV Lite: package the 178-channel Lite source,
+        # not the obsolete app/index.html. Leave Tizen app identity stable.
+        BUILD.mkdir(parents=True)
+        (BUILD / "css").mkdir()
+        (BUILD / "js").mkdir()
+        (BUILD / "img").mkdir()
+        (BUILD / "vendor").mkdir()
+        shutil.copy2(APP / "lite.html", BUILD / "index.html")
+        shutil.copy2(APP / "css" / "lite.css", BUILD / "css" / "lite.css")
+        shutil.copy2(APP / "js" / "lite.js", BUILD / "js" / "lite.js")
+        shutil.copy2(APP / "vendor" / "hls.min.js", BUILD / "vendor" / "hls.min.js")
+        shutil.copy2(APP / "img" / "icon.png", BUILD / "img" / "icon.png")
+        (BUILD / "data").mkdir()
+        shutil.copy2(APP / "data" / "lite-meta.js", BUILD / "data" / "lite-meta.js")
+        shutil.copy2(APP / "data" / "lite-default-channels.js", BUILD / "data" / "lite-default-channels.js")
+        shutil.copy2(APP / "data" / "launchpad-extra-channels.js", BUILD / "data" / "launchpad-extra-channels.js")
+        shutil.copytree(APP / "img" / "lite-logos", BUILD / "img" / "lite-logos")
+        shutil.copy2(APP / "img" / "icon.png", BUILD / "icon.png")
     else:
         shutil.copytree(APP, BUILD)
         shutil.copy2(APP / "img" / "icon.png", BUILD / "icon.png")
@@ -143,25 +164,8 @@ def build(variant: str, profile: str = "public") -> dict:
 
 
 def main():
-    # refresh the baked headlines so the package ships with current news
-    try:
-        import subprocess
-
-        subprocess.run([sys.executable, str(ROOT / "tools" / "fetch_news.py")],
-                       check=True, cwd=str(ROOT))
-    except Exception as exc:  # noqa: BLE001
-        print("news snapshot skipped:", exc)
-
-    # signed stream links expire; drop the ones that no longer answer before
-    # the channel list is rebuilt
-    try:
-        import subprocess
-
-        subprocess.run([sys.executable, str(ROOT / "tools" / "check_overrides.py")],
-                       check=False, cwd=str(ROOT))
-    except Exception as exc:  # noqa: BLE001
-        print("override check skipped:", exc)
-
+    # Build from the official Lite source without running legacy scripts
+    # that may rewrite IPTV catalogs or modify the separate old project.
     wanted = sys.argv[1:] or ["main", "compat", "hello"]
     results = [build(v) for v in wanted]
     print(json.dumps(results, ensure_ascii=False, indent=2))

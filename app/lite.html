@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1920,initial-scale=1,user-scalable=no">
+<title>GoSamTV Lite</title>
+<link rel="stylesheet" href="css/lite.css">
+</head>
+<body>
+<main id="home">
+  <header class="bar">
+    <div class="brand"><img src="img/icon.png" alt="GoSamTV"><span>GoSam<strong>TV</strong></span></div>
+    <div class="top-actions">
+      <div class="quick-search"><span class="search-symbol" aria-hidden="true">⌕</span><input id="channelSearch" type="search" placeholder="Tìm kênh..." autocomplete="off" spellcheck="false" aria-label="Tìm kênh theo tên"><button id="clearSearch" type="button" aria-label="Xóa nội dung tìm kiếm" hidden>×</button><button id="exitSearch" type="button" aria-label="Thoát tìm kiếm">Thoát</button></div>
+      <button id="add" class="top-add" data-focus title="Thêm danh sách M3U" aria-label="Thêm danh sách M3U">+ M3U</button>
+      <button id="favoritesBtn" class="top-fav" data-focus title="Xem kênh yêu thích">★ Yêu thích</button>
+      <button id="infoBtn" class="top-info" type="button" data-focus title="Giới thiệu GoSamTV Lite" aria-label="Thông tin ứng dụng">ⓘ Info</button>
+    </div>
+    <div class="bar-right"><span id="time">--:--</span></div>
+  </header>
+  <div class="channels-title"><h2 id="listTitle">Chào mừng bạn đến với GoSamTV Lite</h2><span id="count">0 kênh</span><button id="manageBtn" data-focus>Quản lý nguồn</button></div>
+
+  <nav id="channelGroups" class="channel-groups" aria-label="Nhóm kênh">
+    <button class="group-chip" data-filter="all" data-focus>Tất cả</button>
+    <button class="group-chip" data-filter="working" style="display:none" data-focus>Kênh hoạt động</button>
+    <button class="group-chip" data-filter="blocked" style="display:none" data-focus>Chờ nguồn</button>
+    <button class="group-chip" data-filter="vtv" data-focus>VTV</button>
+    <button class="group-chip" data-filter="quocgia" data-focus>Quốc gia</button>
+    <button class="group-chip" data-filter="htv" data-focus>HTV / HTVC</button>
+    <button class="group-chip" data-filter="local" data-focus>Địa phương</button>
+    <button class="group-chip" data-filter="vtvcab" data-focus>VTVcab / ON</button>
+    <button class="group-chip" data-filter="sctv" data-focus>SCTV</button>
+    <button class="group-chip" data-filter="tv360" data-focus>TV360</button>
+    <button class="group-chip" data-filter="giaitri" data-focus>Giải trí</button>
+    <button class="group-chip" data-filter="vov" data-focus>VOV</button>
+    <button class="group-chip" data-filter="radio" data-focus>Radio FM</button>
+    <button class="group-chip" data-filter="world" data-focus>Quốc tế</button>
+  </nav>
+  <div id="channels" class="channels"></div>
+  <div id="empty" class="empty" hidden>Chưa có kênh. Vui lòng kiểm tra dữ liệu hoặc thêm danh sách M3U.</div>
+  <div class="footer">◀ ▲ ▼ ▶ Chọn kênh · OK để xem · Giữ OK để đánh dấu yêu thích · RETURN để quay lại</div>
+</main>
+<section id="dialog" class="overlay" hidden><div class="modal">
+  <h2 id="dialogTitle">Thêm danh sách M3U</h2>
+  <label for="sourceName">Tên danh sách</label><input id="sourceName" placeholder="Ví dụ: Danh sách gia đình">
+  <label for="m3uUrl">Đường dẫn M3U / M3U8</label><input id="m3uUrl" type="url" placeholder="https://.../playlist.m3u">
+  <label for="m3uText">Hoặc dán nội dung M3U</label><textarea id="m3uText" rows="4" placeholder="#EXTM3U..."></textarea>
+  <p class="hint" id="dialogMessage">Dán một liên kết danh sách hoặc nội dung M3U. Nếu nhập link tới một kênh .m3u8, app sẽ thêm trực tiếp kênh đó.</p>
+  <div class="actions"><button id="saveSource" class="primary" data-focus>Lưu danh sách</button><button id="cancelSource" data-focus>Đóng</button></div>
+</div></section>
+<section id="aboutDialog" class="overlay" hidden aria-label="Thông tin GoSamTV Lite">
+  <div class="modal about-modal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="about-heading"><img src="img/icon.png" alt=""><div><h2 id="aboutTitle">GoSamTV Lite</h2><p class="about-version">Phiên bản 1.8.3</p></div></div>
+    <p class="about-description">Ứng dụng xem truyền hình và nghe radio Việt Nam, thiết kế gọn nhẹ, dễ sử dụng trên Samsung Smart TV. Hỗ trợ tìm kênh, nhóm kênh, yêu thích, lịch phát sóng và thêm danh sách M3U cá nhân.</p>
+    <div class="about-summary"><span id="aboutCount">178 kênh</span><span>Truyền hình &amp; radio</span><span>Tối ưu điều khiển TV</span></div>
+    <p class="about-follow-label">Theo dõi dự án và cập nhật phiên bản</p>
+    <a id="aboutProjectLink" class="about-project-link" data-focus href="https://github.com/saunguyen/GoSamTV" target="_blank" rel="noopener noreferrer">github.com/saunguyen/GoSamTV</a>
+    <p class="about-note">Bạn có thể mở đường dẫn trên điện thoại hoặc máy tính để theo dõi dự án. Danh sách kênh có thể thay đổi theo nguồn phát.</p>
+    <div class="about-actions"><button id="closeAbout" data-focus>Đóng</button></div>
+  </div>
+</section>
+<section id="player" class="player" hidden>
+  <object id="avplay-object" type="application/avplayer"></object>
+  <video id="video" playsinline></video>
+  <div id="radioVisual" class="radio-visual" hidden aria-label="Màn hình nghe radio">
+    <div class="radio-glow" aria-hidden="true"></div>
+    <div class="radio-content">
+      <div class="radio-live-label"><span class="radio-live-dot"></span><span id="radioLiveLabel">ĐANG KẾT NỐI</span></div>
+      <div class="radio-logo-frame"><img id="radioLogo" alt="" hidden><span id="radioLogoFallback" aria-hidden="true">♫</span></div>
+      <div class="radio-eyebrow">GOSAMTV · RADIO</div>
+      <h2 id="radioChannelName">Tên kênh radio</h2>
+      <div class="radio-waves" id="radioWaves" aria-hidden="true"></div>
+      <p class="radio-caption" id="radioCaption">Đang kết nối nguồn phát thanh…</p>
+    </div>
+  </div>
+  <div id="playerWatermark" class="player-watermark" aria-hidden="true">GoSam<strong>TV</strong></div>
+  <div id="numberHud" class="number-hud" hidden></div>
+  <section id="numberPad" class="number-pad" hidden aria-label="Nhập số kênh">
+    <h2>Chọn kênh bằng số</h2>
+    <p id="numberPadValue" class="number-pad-value">Nhập số kênh</p>
+    <div id="numberPadGrid" class="number-pad-grid">
+      <button type="button" data-digit="1" data-focus>1</button>
+      <button type="button" data-digit="2" data-focus>2</button>
+      <button type="button" data-digit="3" data-focus>3</button>
+      <button type="button" data-digit="4" data-focus>4</button>
+      <button type="button" data-digit="5" data-focus>5</button>
+      <button type="button" data-digit="6" data-focus>6</button>
+      <button type="button" data-digit="7" data-focus>7</button>
+      <button type="button" data-digit="8" data-focus>8</button>
+      <button type="button" data-digit="9" data-focus>9</button>
+      <button type="button" id="numPadDelete" data-focus>Xóa</button>
+      <button type="button" data-digit="0" data-focus>0</button>
+      <button type="button" id="numPadGo" data-focus>OK</button>
+    </div>
+    <button type="button" id="numPadClose" class="number-pad-close" data-focus>Đóng · RETURN</button>
+  </section>
+
+  <aside id="channelPanel" class="player-panel channel-panel" hidden>
+    <div class="panel-head"><h2>Danh sách kênh</h2><span>OK để chuyển · RETURN để đóng</span></div>
+    <div id="channelPanelItems" class="panel-items"></div>
+  </aside>
+  <aside id="guidePanel" class="player-panel guide-panel" hidden>
+    <div class="panel-head"><h2>Lịch phát sóng</h2><span>Hôm nay · RETURN để đóng</span></div>
+    <h3 id="guideChannelName">Kênh đang xem</h3>
+    <div id="guideProvenance" class="guide-provenance">Lịch tham khảo theo kênh, không xác nhận nguồn video đang phát.</div>
+    <div id="guideItems" class="guide-items">Đang tải lịch phát sóng…</div>
+    <button id="officialGuideBtn" class="guide-official-btn" hidden data-focus>Xem lịch trên trang nguồn</button>
+  </aside>
+  <div class="osd" id="osd"><div><h2 id="playingName"></h2><p id="playingStatus">Đang tải...</p></div><div class="osd-right"><button id="openNumberPad" data-focus>123 Chọn kênh</button><button id="favNow" data-focus>☆ Yêu thích</button><span>◀ Danh sách · ▶ Lịch phát sóng · 0–9 Chọn kênh · RETURN Thoát</span></div></div>
+</section>
+<div id="toast" class="toast" hidden></div>
+<script src="$WEBAPIS/webapis/webapis.js"></script><script src="data/lite-meta.js"></script>
+<script src="data/lite-default-channels.js"></script>
+
+<script src="js/lite.js"></script>
+</body>
+</html>

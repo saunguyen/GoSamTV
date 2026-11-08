@@ -1,0 +1,334 @@
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Arial,Helvetica,sans-serif;color:#f5f7fb;background:#09101e}body{overflow:hidden}button,input,textarea{font:inherit}button{border:1px solid #38465c;background:#1b293f;color:#fff;border-radius:12px;padding:14px 24px;cursor:pointer;font-size:20px}button.primary{background:#fb8a16;border-color:#fb8a16;color:#151515;font-weight:700}button:focus,.is-focused{outline:4px solid #9cf58d!important;outline-offset:3px}button:disabled{opacity:.5}#home{height:100vh;overflow-y:auto;padding:30px 64px 90px;scroll-behavior:auto;background:radial-gradient(650px 480px at 82% 21%,#1d3d2d 0%,transparent 72%),#09101e}.bar{display:flex;justify-content:space-between;align-items:center;height:76px}.brand{display:flex;align-items:center;gap:15px;font-size:29px;font-weight:800}.brand img{width:60px;height:60px;object-fit:contain}.brand strong{color:#ff991d}.brand small{font-size:12px;color:#b3c6ce;border:1px solid #3a504d;padding:7px 12px;border-radius:15px;letter-spacing:1px;margin-left:5px}.bar-right{display:flex;align-items:center;gap:22px}#time{font-size:30px;font-weight:700}.bar-sub{color:#aab6c9;font-size:17px}.intro{min-height:315px;display:flex;justify-content:space-between;align-items:center;position:relative;padding:15px 50px;margin:18px 0 28px;border-radius:24px;background:linear-gradient(110deg,#182a36,#13292e 60%,#164b2b);border:1px solid #315042;overflow:hidden}.intro-copy{z-index:2}.eyebrow{font-size:15px;color:#a8f6b6;letter-spacing:2px;font-weight:700}h1{font-size:50px;line-height:1.05;letter-spacing:-1px;margin:14px 0}h1 em{font-style:normal;color:#fca32d}.intro p{font-size:19px;color:#c2cfda;margin:14px 0 22px}.actions{display:flex;gap:13px;flex-wrap:wrap}.visual{position:absolute;right:105px;top:40px;width:310px;height:240px;display:grid;place-items:center}.screen-art{width:100%;height:80%;border:11px solid #71e791;border-radius:25px;box-shadow:0 0 65px #28b45366;display:grid;place-items:center;background:linear-gradient(145deg,#2b743e,#0e3327)}.screen-art span{font-size:100px;color:#ffa12d}.channels-title{display:flex;align-items:center;gap:17px;margin-bottom:17px}.channels-title h2{font-size:27px;margin:0}.channels-title #count{font-size:17px;color:#b5c5ce;margin-right:auto}.channels-title button{font-size:17px;padding:12px 17px}.channels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}.channel{min-height:105px;display:flex;align-items:center;gap:14px;text-align:left;padding:15px;background:#172237;border:1px solid #2d4051;border-radius:14px;min-width:0}.channel .tile{display:grid;place-items:center;flex:none;width:54px;height:54px;font-size:22px;font-weight:800;background:#265343;color:#aff6ca;border-radius:12px}.channel .names{flex:1;min-width:0}.channel strong{display:block;font-size:19px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}.channel small{display:block;color:#afbdd0;font-size:14px;margin-top:7px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.channel .fav{font-size:24px;color:#ffb938}.empty{padding:50px;border:1px dashed #425869;border-radius:15px;text-align:center;font-size:22px;color:#b9ced8}.footer{padding-top:25px;color:#9aadc3;font-size:15px}.overlay[hidden],.player[hidden],[hidden]{display:none!important}.overlay{position:fixed;inset:0;background:#000c;z-index:50;display:flex;align-items:center;justify-content:center}.modal{width:960px;max-height:96vh;overflow:auto;background:#172334;border:1px solid #34475f;border-radius:22px;padding:38px 48px;box-shadow:0 18px 75px #0009}.modal h2{font-size:30px;margin:0 0 17px}.modal label{display:block;color:#cbd7e3;margin-top:17px;font-size:17px}.modal input,.modal textarea{background:#0a1321;border:2px solid #3a5062;color:white;width:100%;padding:15px 18px;border-radius:10px;font-size:19px;margin-top:7px}.modal input:focus,.modal textarea:focus{outline:3px solid #ff9e27}.hint{font-size:16px;color:#b3c1cb;line-height:1.5}.player{position:fixed;inset:0;z-index:100;background:#000}.player video{width:100%;height:100%;object-fit:contain;background:transparent}.player #avplay-object{position:absolute;inset:0;width:100%;height:100%;display:none;background:transparent}.avplay-on,.avplay-on body,.avplay-on .player{background:transparent!important}.avplay-on #home{visibility:hidden}.avplay-on #avplay-object{display:block!important}.avplay-on #video{display:none}.osd{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:25px;padding:45px 64px;background:linear-gradient(transparent,#000d);pointer-events:none}.osd h2{font-size:37px;margin:0 0 10px}.osd p{font-size:20px;color:#c1d5ce;margin:0}.osd-right{display:flex;align-items:center;gap:26px}.osd-right button{pointer-events:auto}.osd-right span{color:#b5c3cb}.toast{position:fixed;bottom:38px;left:50%;transform:translateX(-50%);background:#284431;border:1px solid #74bf78;border-radius:12px;padding:15px 25px;z-index:200;font-size:18px}@media(max-width:1200px){#home{padding:20px 38px}.channels{grid-template-columns:repeat(4,1fr)}.visual{opacity:.35}.intro-copy{max-width:85%}h1{font-size:40px}}
+.show-more{display:flex;justify-content:center;padding:18px}.show-more button{font-size:17px}
+
+/* Lightweight overlays stay in the WebView above Samsung AVPlay native video. */
+.player-panel{position:absolute;z-index:30;top:5%;bottom:6%;width:640px;background:rgba(10,19,34,.96);border:1px solid rgba(143,200,177,.28);border-radius:18px;padding:26px;overflow:hidden;box-shadow:0 18px 60px #000a}
+.channel-panel{left:30px}.guide-panel{right:30px}
+.panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:1px solid #3a5261;padding-bottom:18px}
+.panel-head h2{font-size:27px;margin:0}.panel-head span{font-size:14px;color:#b5c6cc}
+.panel-items,.guide-items{height:calc(100% - 70px);overflow-y:auto;padding-top:12px}
+.panel-item{width:100%;display:flex;align-items:center;gap:16px;text-align:left;min-height:74px;margin:5px 0;padding:10px 12px;border:0;background:#203047}
+.panel-item.is-current{background:#28543b}
+.panel-item .logo-img{height:46px;width:62px;object-fit:contain;border-radius:6px}
+.panel-item .number{font-size:17px;color:#86eba3;width:36px;text-align:right;flex-shrink:0}
+.panel-item strong{font-size:18px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.panel-item:focus{outline:3px solid #9cf58d;outline-offset:0}
+.guide-panel h3{font-size:21px;color:#ffae3b}
+.guide-items{height:calc(100% - 124px)}
+.guide-entry{border-bottom:1px solid #2d4355;padding:14px 5px;font-size:18px;line-height:1.4}
+.guide-entry strong{font-size:17px;color:#a2f4b4;margin-right:20px}
+.guide-entry.live{background:#234531;border-radius:8px;padding-left:12px}
+.number-hud{position:absolute;top:6%;left:50%;transform:translateX(-50%);z-index:60;background:#111d30eF;color:#fff;border:2px solid #ffae3b;border-radius:16px;padding:12px 35px;font-size:40px;font-weight:700;letter-spacing:6px}
+.osd{z-index:20}
+.channel .tile .logo-img{width:100%;height:100%;object-fit:contain;background:#1e3145;border-radius:10px}
+.channel .tile{overflow:hidden}
+
+
+/* GoSamTV 1.8.1 glass overlay — low-cost transparency for Samsung Tizen.
+   Intentionally no backdrop-filter/blur: CU8000 must composite AVPlay smoothly. */
+.player-panel {
+  width: 590px;
+  top: 4%;
+  bottom: 4%;
+  padding: 24px 21px;
+  background: rgba(8, 19, 31, .60);
+  border: 1px solid rgba(205, 237, 231, .24);
+  border-radius: 24px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .25);
+  color: #f9fdff;
+}
+.channel-panel { left: 28px; }
+.guide-panel { right: 28px; width: 680px; }
+.panel-head { border-bottom-color: rgba(224, 244, 240, .22); }
+.panel-head h2 {
+  font-size: 28px;
+  letter-spacing: -.4px;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
+}
+.panel-head span { color: #d0dee0; font-size: 14px; }
+.panel-item {
+  min-height: 72px;
+  margin: 4px 0;
+  padding: 10px 12px;
+  background: rgba(19, 39, 55, .40);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  box-shadow: none;
+  color: #fff;
+}
+.panel-item.is-current {
+  background: rgba(17, 88, 53, .54);
+  border-color: rgba(104, 226, 144, .48);
+}
+.panel-item:focus,
+.panel-item:focus-visible {
+  outline: 3px solid #9df5ad !important;
+  outline-offset: -2px;
+  background: rgba(35, 78, 64, .72);
+  border-color: #ffa62d;
+  box-shadow: inset 4px 0 0 #ff981b;
+}
+.panel-item strong { color: #fff; font-size: 19px; text-shadow: 0 1px 2px #0008; }
+.panel-item .number { color: #a8ffbd; font-weight: 700; }
+.panel-item .tile {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 49px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: rgba(29, 54, 70, .68);
+  color: #b2efcc;
+  font-weight: 700;
+}
+.panel-item .logo-img { width: 60px; height: 44px; object-fit: contain; }
+.guide-panel h3 {
+  margin: 17px 0 6px;
+  font-size: 23px;
+  color: #ffb24c;
+  text-shadow: 0 1px 3px #0008;
+}
+.guide-items { color: #eff8fb; font-size: 19px; }
+.guide-entry {
+  padding: 16px 9px;
+  border-bottom-color: rgba(221, 236, 238, .17);
+  text-shadow: 0 1px 2px #0006;
+}
+.guide-entry strong { color: #aafac0; }
+.guide-entry.live {
+  background: rgba(24, 100, 63, .54);
+  border-left: 4px solid #ff9e26;
+  color: #fff;
+}
+.channel .names { align-self: center; }
+.channel strong { font-size: 21px; }
+
+/* Channel groups: single compact remote-friendly navigation strip. */
+.channels-title { margin-bottom: 9px; }
+.channels-title #manageBtn { margin-left:auto; }
+.channel-groups {
+  display:flex;align-items:center;gap:10px;
+  overflow-x:auto;overflow-y:hidden;
+  margin:0 0 20px;padding:5px 3px 10px;
+  scrollbar-width:none;
+}
+.channel-groups::-webkit-scrollbar { display:none; }
+.channel-groups .group-chip {
+  flex:0 0 auto;white-space:nowrap;
+  padding:12px 21px;font-size:18px;line-height:1.25;
+  border-radius:999px;
+  border:1px solid #405268;
+  background:#162539;color:#d5e2ed;
+  transition: none;
+}
+.channel-groups .group-chip.is-active {
+  color:#0b1a12;background:#9ce4ad;
+  border-color:#b2efbb;font-weight:700;
+}
+.channel-groups .group-chip:focus {
+  outline:3px solid #ffa32d!important;outline-offset:2px;
+}
+
+.guide-official-btn{position:absolute;bottom:22px;left:25px;right:25px;border-color:#eaa04b;background:rgba(100,56,13,.75);font-size:18px;z-index:2}
+
+#playingStatus{max-width:980px;line-height:1.4;color:#fff}.guide-panel h3{line-height:1.35;overflow-wrap:break-word}.guide-entry.live span{font-weight:700;color:#fff}
+
+.guide-provenance{color:#aebfc9;font-size:14px;line-height:1.35;margin:-3px 0 10px}.guide-items{height:calc(100% - 161px)}
+
+/* Optional community catalog: explicitly opt in before extra channels appear. */
+#launchpadBtn {border-color:#6c875c;background:rgba(49,83,55,.24);font-size:16px}
+#launchpadBtn.enabled {color:#b3f5bd;border-color:#85ca89;background:rgba(33,89,42,.55)}
+.launchpad-note {margin:0 0 13px;border-left:3px solid #ffa52c;padding:9px 13px;color:#d5e2eb;background:rgba(28,42,55,.45);font-size:16px;line-height:1.4}
+#launchpadGroupBtn[hidden] {display:none}
+
+
+/* Preserve the exact glass styling from GoSamTV-before-172channels.
+   Only remove the two UI elements the user specifically asked to hide.
+   Keep guide list height correct after hiding them. */
+.guide-panel #guideProvenance,
+.guide-panel #officialGuideBtn {display:none!important}
+.guide-panel .guide-items {height:calc(100% - 124px)}
+
+
+/* GoSamTV Radio: CSS-only, lightweight animation above the native player.
+   This is an ornamental equalizer, not a measured audio spectrum. */
+.player.radio-mode{background:radial-gradient(circle at 51% 37%,#193d42 0%,#102336 44%,#08111d 100%)!important}
+.player.radio-mode #video{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none}
+.avplay-on .player.radio-mode{background:radial-gradient(circle at 51% 37%,#193d42 0%,#102336 44%,#08111d 100%)!important}
+.player .radio-visual[hidden]{display:none!important}
+.radio-visual{position:absolute;inset:0;z-index:4;overflow:hidden;display:flex;align-items:center;justify-content:center;pointer-events:none;color:#f5fffb;background:radial-gradient(circle at 48% 45%,rgba(40,102,89,.34),transparent 54%)}
+.radio-glow{position:absolute;left:50%;top:45%;width:580px;height:580px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(119,237,170,.13);box-shadow:0 0 0 100px rgba(71,204,152,.025),0 0 0 210px rgba(71,204,152,.018)}
+.radio-content{z-index:1;width:min(92%,1200px);display:flex;flex-direction:column;align-items:center;text-align:center;transform:translateY(-48px)}
+.radio-live-label{display:flex;align-items:center;gap:12px;border:1px solid rgba(174,230,205,.25);background:rgba(17,50,56,.7);border-radius:30px;padding:11px 24px;color:#bfdad0;letter-spacing:3px;font-size:16px;font-weight:700}
+.radio-live-dot{width:11px;height:11px;background:#ffad4b;border-radius:50%;box-shadow:0 0 14px rgba(255,173,75,.5)}
+.player.radio-live .radio-live-dot{background:#6cffa3;box-shadow:0 0 14px #75ffa6}
+.radio-logo-frame{height:180px;width:220px;margin:35px 0 18px;display:flex;align-items:center;justify-content:center;border-radius:32px;background:linear-gradient(150deg,rgba(57,116,108,.65),rgba(14,32,45,.9));border:1px solid rgba(146,227,183,.23);box-shadow:0 15px 45px #0005}
+.radio-logo-frame img{max-width:176px;max-height:146px;object-fit:contain}
+.radio-logo-frame img[hidden]{display:none!important}
+.radio-logo-frame #radioLogoFallback{font-size:94px;color:#83e9aa}
+.radio-eyebrow{font-size:17px;font-weight:700;color:#90cfb0;letter-spacing:5px;margin:5px 0 10px}
+#radioChannelName{font-size:clamp(38px,4.4vw,78px);font-weight:800;letter-spacing:-1.6px;margin:0 0 18px;text-shadow:0 5px 18px #0005;max-width:100%;overflow-wrap:anywhere}
+.radio-waves{width:min(100%,880px);height:138px;display:flex;align-items:center;justify-content:center;gap:9px;margin:6px 0 20px}
+.radio-waves .radio-bar{width:12px;height:58px;border-radius:12px;background:linear-gradient(0deg,#3bbf91,#8ff4ae 62%,#ffd17c);transform:scaleY(.16);opacity:.6;transform-origin:center;will-change:transform}
+.player.radio-live .radio-bar{opacity:1;animation:radio-wave 1.35s ease-in-out infinite alternate;animation-delay:var(--radio-delay)}
+@keyframes radio-wave{0%{transform:scaleY(.20)}45%{transform:scaleY(.90)}100%{transform:scaleY(.37)}}
+.radio-caption{font-size:22px;color:#c6d8d4;letter-spacing:.2px;margin:0}
+.player.radio-mode .osd{z-index:20;background:linear-gradient(transparent,rgba(2,9,17,.82))}
+.player.radio-mode .osd h2{font-size:26px}
+@media(max-width:1200px){.radio-logo-frame{height:140px;width:175px;margin-top:24px}.radio-logo-frame img{max-height:112px;max-width:138px}.radio-waves{height:100px;gap:6px}.radio-waves .radio-bar{width:8px;height:52px}.radio-content{transform:translateY(-28px)}.radio-caption{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.player.radio-live .radio-bar{animation:none;transform:scaleY(.45)}}
+
+
+/* A few radio-labelled feeds include a real video track; never mask it. */
+.player.radio-mode.radio-has-video #video{opacity:1}
+.player.radio-mode.radio-has-video{background:#000!important}
+.avplay-on .player.radio-mode.radio-has-video{background:transparent!important}
+
+
+/* GoSamTV Home 2.1 — flat, compact UI for CU8000 (no blur/filter or large shadows). */
+#home{padding:18px 44px 64px;background:#0b1220}
+.bar{height:58px}
+.brand{font-size:25px;gap:12px}
+.brand img{width:48px;height:48px}
+.brand small{font-size:11px;padding:6px 11px}
+#time{font-size:25px}
+.intro{min-height:198px;margin:12px 0 22px;padding:20px 34px;border-radius:18px;background:linear-gradient(115deg,#172a37 0%,#142d30 69%,#19432f 100%);border:1px solid #304b43}
+.intro-copy{width:100%;max-width:calc(100% - 270px)}
+.eyebrow{font-size:12px;letter-spacing:2px}
+.intro h1{font-size:36px;letter-spacing:-.5px;line-height:1.13;margin:8px 0}
+.intro h1 em{color:#ffa12d}
+.intro p{font-size:16px;margin:8px 0 14px;line-height:1.35;color:#c2d1d9}
+.intro .actions{display:flex;gap:10px;align-items:center;flex-wrap:nowrap}
+.intro .actions>button{padding:12px 17px;font-size:16px;white-space:nowrap;border-radius:11px;min-height:48px}
+.intro .visual{right:50px;top:35px;width:192px;height:150px}
+.intro .screen-art{border-width:7px;border-radius:20px;box-shadow:none}
+.intro .screen-art span{font-size:66px}
+.quick-search{display:flex;align-items:center;position:relative;flex:1;max-width:385px;min-width:200px;height:48px;border:1px solid #4b6574;background:#0b1929;border-radius:11px}
+.search-symbol{font-size:28px;line-height:1;color:#91aeb8;margin:0 8px 0 15px}
+#channelSearch{background:transparent;border:0;outline:none;color:#fff;width:100%;min-width:0;height:100%;font-size:18px;padding:0 8px 0 0}
+#channelSearch::placeholder{color:#a6b9c4;opacity:1}
+.quick-search:focus-within{border:2px solid #a7f3b4;outline:2px solid #fba02a;outline-offset:2px}
+#clearSearch{border:0;background:transparent;color:#d5e5e7;font-size:26px;width:42px;height:44px;min-height:0;padding:0;flex-shrink:0}
+.channels-title{margin:0 0 11px;gap:14px}
+.channels-title h2{font-size:24px}
+.channels-title #count{font-size:15px}
+.channels-title button{font-size:15px;padding:9px 13px}
+.channel-groups{gap:8px;margin:0 0 13px;padding:3px 3px 7px}
+.channel-groups .group-chip{font-size:16px;padding:9px 15px;background:#16283a;border:1px solid #33475b;border-radius:11px}
+.channel-groups .group-chip.is-active{background:#a0e7b1;border-color:#a0e7b1}
+.channels{gap:11px}
+.channel{min-height:89px;padding:12px;gap:13px;border-radius:12px;background:#172339;border-color:#263b50;box-shadow:none}
+.channel .tile{width:60px;height:56px;background:#203347;border-radius:10px}
+.channel strong{font-size:19px}
+.channel .source-state{font-size:17px;color:#c8dfdc}
+.channel .fav{font-size:21px;color:#ffad42}
+.channel:focus,.channel.is-focused{background:#23423e;outline:3px solid #a1f3b5!important;outline-offset:1px;border-color:#ff9c31}
+.channel-groups .group-chip:focus{background:#234b3a;outline:3px solid #ffa32d!important;color:#fff}
+@media(max-width:1200px){#home{padding:16px 26px 65px}.intro{padding:18px 24px}.intro-copy{max-width:100%}.intro .visual{display:none}.intro h1{font-size:30px}.quick-search{max-width:320px}.intro .actions{flex-wrap:wrap}}
+
+
+/* Official compact Home: header tools, no hero, low-cost flat surfaces. */
+#home{padding:18px 44px 62px;background:#0b1220}
+.bar{height:74px;gap:24px;margin-bottom:18px;border-bottom:1px solid #26384a;padding-bottom:15px}
+.brand{flex:0 0 auto;white-space:nowrap}
+.brand img{width:50px;height:50px}
+.brand span{font-size:27px}
+.top-actions{display:flex;align-items:center;justify-content:center;gap:11px;flex:1;min-width:0}
+.top-actions .quick-search{flex:1 1 440px;min-width:180px;max-width:560px;height:48px}
+.top-actions .quick-search #channelSearch{font-size:19px}
+.top-actions>button{flex:none;height:48px;min-height:48px;padding:0 21px;font-size:17px;border-radius:11px;border:1px solid #3b5264;color:#f2f7f9;background:#17283b;white-space:nowrap}
+.top-actions .top-add{color:#17231b;border-color:#ffa32b;background:#ff9b23;font-weight:750}
+.top-actions .top-fav{color:#fff}
+.top-actions>button:focus{outline:3px solid #a1f3b5!important;outline-offset:2px;border-color:#ffb255}
+.bar-right{flex:0 0 auto;margin-left:auto}
+#time{font-size:24px}
+.channels-title{padding-top:3px}
+.channels-title h2{font-size:25px}
+.channels-title #count{font-size:15px;color:#9fb3bd}
+.channel-groups{margin-bottom:15px}
+@media(max-width:1200px){.bar{gap:11px}.brand span{font-size:21px}.brand img{width:39px;height:39px}.top-actions{gap:7px}.top-actions .quick-search{min-width:145px}.top-actions>button{font-size:14px;padding:0 11px}.bar-right #time{font-size:20px}}
+
+
+/* GoSamTV Lite: completely hide bottom overlay once video starts.
+   The watermark is a tiny static text element; no blur or animations. */
+.player.osd-hidden #osd{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  background:none!important;
+}
+.player-watermark{
+  position:absolute;
+  z-index:12;
+  top:27px;
+  right:34px;
+  color:rgba(255,255,255,.15);
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:.2px;
+  line-height:1;
+  pointer-events:none;
+  user-select:none;
+  text-shadow:none;
+}
+.player-watermark strong{color:rgba(255,172,48,.15)}
+.player[hidden] .player-watermark{display:none}
+
+/* TV remote UX: no native white scrollbars in channel list or EPG.
+   Scrolling by arrow keys/mouse wheel remains enabled. */
+.player .panel-items,
+.player .guide-items {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.player .panel-items::-webkit-scrollbar,
+.player .guide-items::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+
+/* GoSamTV Lite about dialog — static and lightweight for Samsung TV. */
+.top-actions .top-info{
+  padding:0 14px;
+  background:#17283b;
+  border-color:#3b5264;
+}
+.about-modal{width:750px;max-width:90vw;padding:30px 36px;box-shadow:none}
+.about-heading{display:flex;align-items:center;gap:20px;margin-bottom:20px}
+.about-heading img{width:70px;height:70px;object-fit:contain}
+.about-heading h2{margin:0 0 8px;font-size:31px}
+.about-version{margin:0;font-size:18px;color:#a5e7b8}
+.about-description{font-size:20px;line-height:1.5;margin:12px 0 20px;color:#e2eef0}
+.about-summary{display:flex;flex-wrap:wrap;gap:9px}
+.about-summary span{border:1px solid #3b5b5b;border-radius:9px;background:#203548;padding:9px 12px;color:#cdf2da;font-size:16px}
+.about-follow-label{font-size:19px;font-weight:700;margin:26px 0 9px}
+.about-project-link{display:block;color:#a5f7bf;background:#0d2030;border:1px solid #476b6c;border-radius:10px;padding:14px 16px;font-size:18px;overflow-wrap:anywhere}
+.about-project-link:focus{outline:3px solid #ffac42;outline-offset:3px}
+.about-note{color:#afc3ca;line-height:1.4;font-size:16px;margin:12px 0 24px}
+.about-actions{display:flex;justify-content:flex-end}
+.about-actions button{padding:12px 30px;font-size:18px}
+@media(max-width:1200px){
+  .top-actions .top-info{padding:0 9px;font-size:14px}
+  .about-modal{padding:23px 27px}
+}
+
+/* Samsung Smart Remote 1.8.3: small app-owned numeric keypad fallback. */
+.player .number-pad[hidden]{display:none!important}
+.number-pad{position:absolute;z-index:80;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;max-width:90vw;padding:22px;border:1px solid #668981;border-radius:20px;background:#122336;color:#fff;box-shadow:0 10px 30px #0009}
+.number-pad h2{font-size:23px;margin:0 0 10px;text-align:center}
+.number-pad-value{font-size:31px;min-height:45px;margin:0 0 13px;text-align:center;color:#b3fac7}
+.number-pad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.number-pad-grid button{padding:12px 4px;font-size:29px;min-height:62px;border-radius:9px}
+.number-pad-grid #numPadDelete,.number-pad-grid #numPadGo{font-size:22px}
+.number-pad-close{display:block;width:100%;font-size:18px;padding:9px;margin-top:12px}
+.number-pad button:focus{outline:3px solid #ffb149!important;outline-offset:1px}
+#openNumberPad{font-size:20px;padding:12px 16px;white-space:nowrap}
+#exitSearch{display:none;flex:none;width:auto;height:42px;padding:0 9px;background:#2a4055;color:#e2f5ef;border:0;font-size:15px}
+.quick-search:focus-within #exitSearch{display:block}
+#exitSearch:focus{outline:2px solid #ffb347}
+@media(max-width:1200px){#openNumberPad{font-size:16px;padding:8px}}
