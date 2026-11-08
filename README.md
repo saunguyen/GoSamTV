@@ -16,6 +16,16 @@ GoSamTV Lite là ứng dụng xem truyền hình và nghe radio, tập trung và
 
 Danh mục mặc định có **178 kênh (147 truyền hình, 31 radio)** đã từng phát được trong quá trình kiểm tra trên Chrome. Khả năng phát trên TV phụ thuộc từng nguồn và kết nối mạng; không cam kết mọi nguồn luôn hoạt động.
 
+## Xem trực tuyến trên Chrome
+
+**[▶ Mở GoSamTV Lite 1.8.3 — xem online](https://saunguyen.github.io/GoSamTV/lite/)**
+
+Mở liên kết bằng **Google Chrome, Microsoft Edge** hoặc trình duyệt có hỗ trợ phát HLS. Không cần tải hay cài WGT để xem trên máy tính.
+
+- **Trang online:** https://saunguyen.github.io/GoSamTV/lite/
+- **Xem trước trên máy tính đang lưu dự án:** \`file:///S:/GoSamTV%20Lite/app/lite.html\` — chỉ mở được trên máy có ổ \`S:\`, **không phải liên kết internet**.
+- Nguồn phát có thể bị giới hạn theo trình duyệt, CORS hoặc chính sách bên cung cấp. Một số kênh hoạt động trên TV nhưng không phát trên Chrome, và ngược lại.
+
 ## Hình ảnh giao diện
 
 Các ảnh giới thiệu được ghi lại từ **GoSamTV Lite 1.8.3**: ảnh giao diện kiểm thử trên Chrome và ảnh thực tế người dùng cung cấp (VTV6). Hiển thị trên Samsung TV có thể hơi khác.
