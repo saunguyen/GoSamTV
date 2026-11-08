@@ -16,6 +16,30 @@ GoSamTV Lite là ứng dụng xem truyền hình và nghe radio, tập trung và
 
 Danh mục mặc định có **178 kênh (147 truyền hình, 31 radio)** đã từng phát được trong quá trình kiểm tra trên Chrome. Khả năng phát trên TV phụ thuộc từng nguồn và kết nối mạng; không cam kết mọi nguồn luôn hoạt động.
 
+## Hình ảnh giao diện
+
+Các ảnh dưới đây được chụp trực tiếp từ **GoSamTV Lite 1.8.3 trên Chrome** (bản xem trước để kiểm tra giao diện); hiển thị trên Samsung TV có thể hơi khác.
+
+<div align="center">
+
+**Trang chủ — 178 kênh**
+
+<img src="screenshots-lite/01-trang-chu.png" alt="GoSamTV Lite 1.8.3 — màn hình chính 178 kênh" width="850">
+
+**Giới thiệu ứng dụng và thông tin phiên bản**
+
+<img src="screenshots-lite/02-gioi-thieu.png" alt="Cửa sổ Info của GoSamTV Lite 1.8.3" width="720">
+
+**Danh sách kênh khi đang xem**
+
+<img src="screenshots-lite/03-danh-sach-kenh.png" alt="Danh sách kênh trên giao diện xem GoSamTV Lite" width="850">
+
+**Radio Việt Nam**
+
+<img src="screenshots-lite/04-radio.png" alt="Màn hình radio GoSamTV Lite" width="850">
+
+</div>
+
 ## Tính năng
 
 - **Truyền hình và radio:** các nhóm VTV, HTV, VTVcab, SCTV, VOV và nhiều kênh địa phương, quốc tế.
